@@ -1,5 +1,6 @@
 ---
 import { defaultNavLinks, type NavLink } from '../lib/nav';
+import { withBase } from '../lib/paths';
 
 interface Props {
   logoUrl: string;
@@ -19,32 +20,36 @@ const {
   signInLabel = 'Log in',
   navLinks = defaultNavLinks,
 } = Astro.props;
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links = navLinks.length ? navLinks : defaultNavLinks;
+const homeHref = withBase('/');
+const resolvedCtaUrl = withBase(ctaUrl);
+const resolvedSignInUrl = withBase(signInUrl);
 ---
 
 <header class="site-header">
   <div class="container-site flex min-h-[5.25rem] items-center justify-between gap-6">
-    <a href="/" class="flex items-center no-underline">
+    <a href={homeHref} class="flex items-center no-underline">
       <img src={logoUrl} alt="Data for Lawyers" class="h-12 w-auto sm:h-14" />
     </a>
 
     <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
       {
-        links.map((item) => (
-          <a
-            href={item.href}
-            class:list={['nav-link', currentPath === item.href && 'is-active']}
-          >
-            {item.label}
-          </a>
-        ))
+        links.map((item) => {
+          const href = withBase(item.href);
+          const active = currentPath === href.replace(/\/$/, '');
+          return (
+            <a href={href} class:list={['nav-link', active && 'is-active']}>
+              {item.label}
+            </a>
+          );
+        })
       }
     </nav>
 
     <div class="flex items-center gap-2 sm:gap-3">
-      <a href={signInUrl} class="nav-link hidden md:inline">{signInLabel}</a>
-      <a href={ctaUrl} class="btn btn-primary btn-sm hidden sm:inline-flex">{ctaLabel}</a>
+      <a href={resolvedSignInUrl} class="nav-link hidden md:inline">{signInLabel}</a>
+      <a href={resolvedCtaUrl} class="btn btn-primary btn-sm hidden sm:inline-flex">{ctaLabel}</a>
       <button
         id="menu-toggle"
         type="button"
@@ -82,12 +87,12 @@ const links = navLinks.length ? navLinks : defaultNavLinks;
   <div class="container-site flex min-h-screen flex-col gap-4 pt-28 pb-10">
     {
       links.map((item) => (
-        <a href={item.href} data-menu-link class="text-2xl font-semibold text-white no-underline">
+        <a href={withBase(item.href)} data-menu-link class="text-2xl font-semibold text-white no-underline">
           {item.label}
         </a>
       ))
     }
-    <a href={signInUrl} data-menu-link class="text-lg text-white/75 no-underline">{signInLabel}</a>
-    <a href={ctaUrl} data-menu-link class="btn btn-primary mt-4 w-fit">{ctaLabel}</a>
+    <a href={resolvedSignInUrl} data-menu-link class="text-lg text-white/75 no-underline">{signInLabel}</a>
+    <a href={resolvedCtaUrl} data-menu-link class="btn btn-primary mt-4 w-fit">{ctaLabel}</a>
   </div>
 </div>

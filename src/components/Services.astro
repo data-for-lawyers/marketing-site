@@ -1,5 +1,6 @@
 ---
 import SectionHeader from './SectionHeader.astro';
+import { withBase } from '../lib/paths';
 
 type Service = {
   title: string;
@@ -33,7 +34,7 @@ const featured = services.filter((service) => service.image).slice(0, 3);
       {
         featured.map((service, index) => (
           <a
-            href="/services"
+            href={withBase('/services')}
             class="gallery-card reveal"
             data-reveal
             style={`--reveal-delay: ${index * 80}ms`}

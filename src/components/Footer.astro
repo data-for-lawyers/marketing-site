@@ -1,5 +1,6 @@
 ---
 import { defaultNavLinks, type NavLink } from '../lib/nav';
+import { withBase } from '../lib/paths';
 
 interface Props {
   companyName: string;
@@ -42,15 +43,17 @@ const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
 const links = navLinks.length ? [...navLinks] : [...defaultNavLinks];
 
 const companyLinks = [
-  { href: '/about-us', label: 'About Us' },
-  { href: '/services', label: 'Services' },
-  { href: '/contact-us', label: 'Contact' },
+  { href: withBase('/about-us'), label: 'About Us' },
+  { href: withBase('/services'), label: 'Services' },
+  { href: withBase('/contact-us'), label: 'Contact' },
 ];
 
 const resourceLinks = [
-  ...links.filter((link) => !['/about-us', '/services'].includes(link.href)),
-  { href: '/privacy-policy', label: 'Privacy Policy' },
-  { href: '/terms-of-service', label: 'Terms of Service' },
+  ...links
+    .filter((link) => !['/about-us', '/services'].includes(link.href))
+    .map((link) => ({ ...link, href: withBase(link.href) })),
+  { href: withBase('/privacy-policy'), label: 'Privacy Policy' },
+  { href: withBase('/terms-of-service'), label: 'Terms of Service' },
   { href: linkedInUrl, label: 'LinkedIn', external: true as const },
 ];
 ---
@@ -59,7 +62,7 @@ const resourceLinks = [
   <div class="container-site">
     <div class="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
       <div>
-        <a href="/" class="flex items-center no-underline">
+        <a href={withBase('/')} class="flex items-center no-underline">
           <img src={logoUrl} alt={companyName} class="h-12 w-auto sm:h-14" />
         </a>
         <p class="text-soft mt-4 max-w-xs text-sm leading-7">{tagline}</p>
@@ -95,7 +98,7 @@ const resourceLinks = [
         <p class="mb-4 text-sm font-semibold">{getStartedHeading}</p>
         <div class="grid gap-2.5">
           <a href={demoUrl} class="footer-link">{demoCtaLabel}</a>
-          <a href={signInUrl} class="footer-link">{signInLabel}</a>
+          <a href={withBase(signInUrl)} class="footer-link">{signInLabel}</a>
           <a href={phoneHref} class="footer-link">{phone}</a>
           <a href={`mailto:${email}`} class="footer-link">{email}</a>
         </div>

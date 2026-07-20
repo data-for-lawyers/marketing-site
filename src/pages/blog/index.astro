@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import AboutCta from '../../components/AboutCta.astro';
 import { getBlogPageContent, getSharedCta } from '../../lib/content';
+import { withBase } from '../../lib/paths';
 import { formatBlogCardDate, getPublishedPostSummaries } from '../../lib/posts';
 
 const { site, blog } = await getBlogPageContent();
@@ -27,7 +28,7 @@ const initialCount = 4;
             <div class="blog-grid" data-blog-grid data-initial={initialCount}>
               {posts.map((post, index) => (
                 <a
-                  href={`/blog/${post.slug}`}
+                  href={withBase(`/blog/${post.slug}`)}
                   class:list={['blog-card', 'reveal', index >= initialCount && 'is-hidden']}
                   data-reveal
                   data-blog-card

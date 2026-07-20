@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getSite } from '../lib/content';
+import { withBase } from '../lib/paths';
 
 interface Props {
   title: string;
@@ -19,7 +20,7 @@ const site = await getSite();
       logoUrl={site.logoLightUrl || site.logoUrl}
       phone={site.phone}
       ctaLabel={site.headerCtaLabel}
-      ctaUrl={site.headerCtaUrl}
+      ctaUrl={withBase(site.headerCtaUrl)}
       signInUrl={site.signInUrl}
       signInLabel={site.signInLabel}
       navLinks={site.navLinks}

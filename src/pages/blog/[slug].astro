@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getBlogPageContent } from '../../lib/content';
+import { withBase } from '../../lib/paths';
 import { formatPostDate, getPostPageData, getPublishedPostSummaries } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -27,7 +28,7 @@ if (!post) {
 <SiteLayout title={post.title} description={post.excerpt}>
   <article class="section section-light">
     <div class="container-site">
-      <a href="/blog" class="text-link">{blog.backLabel}</a>
+      <a href={withBase('/blog')} class="text-link">{blog.backLabel}</a>
 
       <header class="mt-8 max-w-3xl">
         <p class="eyebrow">

@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../lib/paths';
+
 type FaqItem = {
   question: string;
   answer: string;
@@ -28,7 +30,7 @@ const {
       <p class="faq-description">{description}</p>
       {
         showAllLink && (
-          <a href="/faqs" class="text-link faq-all-link">
+          <a href={withBase('/faqs')} class="text-link faq-all-link">
             {browseAllLabel}
           </a>
         )

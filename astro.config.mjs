@@ -8,15 +8,24 @@ import keystatic from '@keystatic/astro';
 
 import node from '@astrojs/node';
 
+// GitHub Pages is static-only. Keep Keystatic + Node adapter for local CMS editing.
+const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
+
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://data-for-lawyers.github.io',
+  base: '/marketing-site',
   vite: {
     plugins: [tailwindcss()],
   },
-
-  integrations: [react(), markdoc(), keystatic()],
-
-  adapter: node({
-    mode: 'standalone',
-  }),
+  integrations: isGitHubPages
+    ? [react(), markdoc()]
+    : [react(), markdoc(), keystatic()],
+  ...(isGitHubPages
+    ? {}
+    : {
+        adapter: node({
+          mode: 'standalone',
+        }),
+      }),
 });

@@ -13,8 +13,12 @@ const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://data-for-lawyers.github.io',
-  base: '/marketing-site',
+  ...(isGitHubPages
+    ? {
+        site: 'https://data-for-lawyers.github.io',
+        base: '/marketing-site',
+      }
+    : {}),
   vite: {
     plugins: [tailwindcss()],
   },

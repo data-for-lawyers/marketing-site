@@ -13,15 +13,10 @@ heroAvatars:
   - /images/homepage/avatars/avatar-1.jpg
   - /images/homepage/avatars/avatar-2.jpg
   - /images/homepage/avatars/avatar-3.jpg
-servicesEyebrow: Services
 servicesTitle: A Better Way to Retrieve Records
 servicesDescription: >-
   Prepare, track, and receive authenticated carrier and third-party records
-  through one secure platform.
-featuresTitle: Built for Legal Records Workflows
-featuresDescription: >-
-  Practical capabilities that help teams manage requests from preparation
-  through authenticated delivery.
+  through one secure platform — from first request to final delivery.
 whyEyebrow: How it works
 whyTitle: How It Works
 whyDescription: A clear process from request submission through authenticated delivery.
@@ -130,22 +125,31 @@ whyItems:
     description: Records are authenticated and prepared with complete data.
   - title: Receive Records
     description: Receive organized, authenticated records ready for your case.
-stats:
-  - value: 99%
-    label: Authenticated deliveries
-  - value: 30+
-    label: Carriers supported
-  - value: 24/7
-    label: Request visibility
 carriers:
-  - Verizon
-  - AT&T
-  - T-Mobile
-  - Sprint
-  - US Cellular
-  - Metro
-  - Boost
-  - Cricket
+  - name: AT&T
+    logo: /images/carriers/att.svg
+  - name: Cricket
+    logo: /images/carriers/cricket.svg
+  - name: Boost Mobile
+    logo: /images/carriers/boost-mobile.svg
+  - name: Consumer Cellular
+    logo: /images/carriers/consumer-cellular.svg
+  - name: T-Mobile
+    logo: /images/carriers/tmobile.svg
+  - name: Metro PCS
+    logo: /images/carriers/metro-pcs.svg
+  - name: Mint Mobile
+    logo: /images/carriers/mint-mobile.svg
+  - name: Verizon
+    logo: /images/carriers/verizon.svg
+  - name: Tracfone
+    logo: /images/carriers/tracfone.svg
+  - name: Spectrum Mobile
+    logo: /images/carriers/spectrum.svg
+  - name: Xfinity Mobile
+    logo: /images/carriers/xfinity-mobile.svg
+  - name: Visible
+    logo: /images/carriers/visible.svg
 testimonials:
   - name: Brandon Altos
     role: Litigation Partner

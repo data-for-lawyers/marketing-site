@@ -10,48 +10,93 @@ type Service = {
 };
 
 interface Props {
-  eyebrow: string;
   title: string;
   description?: string;
   services: readonly Service[];
 }
 
 const { title, description, services } = Astro.props;
-const featured = services.filter((service) => service.image).slice(0, 3);
+const items = services.filter((service) => service.image).slice(0, 5);
 ---
 
-<section id="platform" class="section section-light">
-  <div class="container-site section-stack">
-    <div class="reveal" data-reveal>
-      <SectionHeader
-        title={title}
-        description={description}
-        align="center"
-      />
-    </div>
+{
+  items.length > 0 && (
+    <section id="platform" class="section platform-section">
+      <div class="container-site section-stack">
+        <div class="reveal" data-reveal>
+          <SectionHeader title={title} description={description} align="center" />
+        </div>
 
-    <div class="image-gallery">
-      {
-        featured.map((service, index) => (
-          <a
-            href={withBase('/services')}
-            class="gallery-card reveal"
-            data-reveal
-            style={`--reveal-delay: ${index * 80}ms`}
-          >
-            <img src={service.image!} alt={service.title} />
-            <div class="service-card-tag">
-              <h3 class="service-card-tag-label">{service.title}</h3>
-              <p class="service-card-tag-desc">{service.description}</p>
-              <span class="service-card-tag-badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M7 17L17 7M9 7h8v8" />
-                </svg>
-              </span>
-            </div>
-          </a>
-        ))
-      }
-    </div>
-  </div>
-</section>
+        <div
+          class="platform-explorer reveal"
+          data-reveal
+          data-platform-explorer
+          style="--reveal-delay: 80ms"
+        >
+          <div class="platform-nav" role="tablist" aria-label="Platform capabilities">
+            {items.map((service, index) => (
+              <button
+                type="button"
+                class:list={['platform-nav-item', index === 0 && 'is-active']}
+                role="tab"
+                id={`platform-tab-${index}`}
+                aria-selected={index === 0 ? 'true' : 'false'}
+                aria-controls={`platform-panel-${index}`}
+                data-platform-tab
+                data-index={index}
+              >
+                <span class="platform-nav-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span class="platform-nav-copy">
+                  <span class="platform-nav-title">{service.title}</span>
+                  <span class="platform-nav-desc">{service.description}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div class="platform-stage">
+            {items.map((service, index) => (
+              <div
+                class:list={['platform-panel', index === 0 && 'is-active']}
+                role="tabpanel"
+                id={`platform-panel-${index}`}
+                aria-labelledby={`platform-tab-${index}`}
+                data-platform-panel
+                data-index={index}
+                aria-hidden={index === 0 ? 'false' : 'true'}
+              >
+                <div class="platform-visual">
+                  <img src={service.image!} alt="" />
+                  <div class="platform-visual-shade" aria-hidden="true" />
+                </div>
+
+                <div class="platform-detail">
+                  <p class="platform-detail-kicker">Capability {String(index + 1).padStart(2, '0')}</p>
+                  <h3 class="platform-detail-title">{service.title}</h3>
+                  <p class="platform-detail-desc">{service.description}</p>
+
+                  {service.bullets && service.bullets.length > 0 && (
+                    <ul class="platform-bullets">
+                      {service.bullets.map((bullet) => (
+                        <li>{bullet}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <a class="platform-link" href={withBase('/services')}>
+                    Explore all services
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -3,8 +3,11 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Contact from '../../components/Contact.astro';
 import { getContactContent } from '../../lib/content';
+import { notFoundIfDisabled } from '../../lib/pages';
 
 const { site, contact } = await getContactContent();
+const disabled = notFoundIfDisabled(site.pagesEnabled, '/contact-us');
+if (disabled) return disabled;
 ---
 
 <SiteLayout title={contact.title} description={contact.description}>

@@ -3,8 +3,11 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { getTermsContent } from '../../lib/content';
+import { notFoundIfDisabled } from '../../lib/pages';
 
 const { site, terms } = await getTermsContent();
+const disabled = notFoundIfDisabled(site.pagesEnabled, '/terms-of-service');
+if (disabled) return disabled;
 ---
 
 <SiteLayout title={terms.title} description={terms.description}>

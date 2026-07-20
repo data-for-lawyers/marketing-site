@@ -4,8 +4,11 @@ import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import AboutCta from '../../components/AboutCta.astro';
 import { getPricingContent, getSharedCta } from '../../lib/content';
+import { notFoundIfDisabled } from '../../lib/pages';
 
 const { site, pricing } = await getPricingContent();
+const disabled = notFoundIfDisabled(site.pagesEnabled, '/pricing');
+if (disabled) return disabled;
 const cta = getSharedCta(site);
 ---
 

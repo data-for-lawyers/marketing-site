@@ -4,17 +4,20 @@ import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import AboutCta from '../../components/AboutCta.astro';
 import { getBlogPageContent, getSharedCta } from '../../lib/content';
+import { notFoundIfDisabled } from '../../lib/pages';
 import { withBase } from '../../lib/paths';
 import { formatBlogCardDate, getPublishedPostSummaries } from '../../lib/posts';
 
 const { site, blog } = await getBlogPageContent();
+const disabled = notFoundIfDisabled(site.pagesEnabled, '/blog');
+if (disabled) return disabled;
 const cta = getSharedCta(site);
 const posts = await getPublishedPostSummaries();
 const initialCount = 4;
 ---
 
 <SiteLayout title={blog.title} description={blog.description}>
-  <PageHero eyebrow={blog.eyebrow} title={blog.heroTitle} />
+  <PageHero eyebrow={blog.eyebrow || blog.title} title={blog.heroTitle || blog.title} />
 
   <section class="section section-light">
     <div class="container-site">

@@ -1,5 +1,6 @@
 ---
 import { defaultNavLinks, type NavLink } from '../lib/nav';
+import { isPageEnabled, type PagesEnabled } from '../lib/pages';
 import { withBase } from '../lib/paths';
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
   getStartedHeading?: string;
   copyrightSuffix?: string;
   navLinks?: readonly NavLink[];
+  pagesEnabled?: Partial<PagesEnabled>;
 }
 
 const {
@@ -36,6 +38,7 @@ const {
   getStartedHeading = 'Get started',
   copyrightSuffix = 'All rights reserved.',
   navLinks = defaultNavLinks,
+  pagesEnabled,
 } = Astro.props;
 
 const year = new Date().getFullYear();
@@ -43,17 +46,23 @@ const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
 const links = navLinks.length ? [...navLinks] : [...defaultNavLinks];
 
 const companyLinks = [
-  { href: withBase('/about-us'), label: 'About Us' },
-  { href: withBase('/services'), label: 'Services' },
-  { href: withBase('/contact-us'), label: 'Contact' },
-];
+  { href: '/about-us', label: 'About Us' },
+  { href: '/services', label: 'Services' },
+  { href: '/contact-us', label: 'Contact' },
+]
+  .filter((link) => isPageEnabled(pagesEnabled, link.href))
+  .map((link) => ({ ...link, href: withBase(link.href) }));
 
 const resourceLinks = [
   ...links
     .filter((link) => !['/about-us', '/services'].includes(link.href))
     .map((link) => ({ ...link, href: withBase(link.href) })),
-  { href: withBase('/privacy-policy'), label: 'Privacy Policy' },
-  { href: withBase('/terms-of-service'), label: 'Terms of Service' },
+  ...(isPageEnabled(pagesEnabled, '/privacy-policy')
+    ? [{ href: withBase('/privacy-policy'), label: 'Privacy Policy' }]
+    : []),
+  ...(isPageEnabled(pagesEnabled, '/terms-of-service')
+    ? [{ href: withBase('/terms-of-service'), label: 'Terms of Service' }]
+    : []),
   { href: linkedInUrl, label: 'LinkedIn', external: true as const },
 ];
 ---

@@ -3,8 +3,11 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import AboutCta from '../../components/AboutCta.astro';
 import { getAboutContent, getSharedCta } from '../../lib/content';
+import { notFoundIfDisabled } from '../../lib/pages';
 
 const { site, about } = await getAboutContent();
+const disabled = notFoundIfDisabled(site.pagesEnabled, '/about-us');
+if (disabled) return disabled;
 const cta = getSharedCta(site);
 
 const expertise = about.sections.find((s) => s.title === 'Our Expertise') ?? about.sections[1];

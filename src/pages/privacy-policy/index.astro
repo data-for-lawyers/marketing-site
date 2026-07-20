@@ -3,8 +3,11 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { getPrivacyContent } from '../../lib/content';
+import { notFoundIfDisabled } from '../../lib/pages';
 
 const { site, privacy } = await getPrivacyContent();
+const disabled = notFoundIfDisabled(site.pagesEnabled, '/privacy-policy');
+if (disabled) return disabled;
 ---
 
 <SiteLayout title={privacy.title} description={privacy.description}>

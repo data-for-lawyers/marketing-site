@@ -24,14 +24,28 @@ ctaPoints:
   - Schedule a free consultation
   - Get tailored records solutions
   - Build a stronger case workflow
+pagesEnabled:
+  services: true
+  about: true
+  pricing: false
+  blog: true
+  faqs: true
+  contact: true
+  privacy: true
+  terms: true
 navLinks:
   - label: Services
     href: /services
+    enabled: true
   - label: About Us
     href: /about-us
+    enabled: true
   - label: Pricing
     href: /pricing
+    enabled: true
   - label: Blog
     href: /blog
+    enabled: true
   - label: FAQs
     href: /faqs
+    enabled: true

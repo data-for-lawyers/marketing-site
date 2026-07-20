@@ -13,7 +13,22 @@ const bulletItem = fields.text({ label: 'Bullet' });
 const navLink = fields.object({
   label: fields.text({ label: 'Label' }),
   href: fields.text({ label: 'URL path' }),
+  enabled: fields.checkbox({ label: 'Show in navigation', defaultValue: true }),
 });
+
+const pagesEnabled = fields.object(
+  {
+    services: fields.checkbox({ label: 'Services', defaultValue: true }),
+    about: fields.checkbox({ label: 'About Us', defaultValue: true }),
+    pricing: fields.checkbox({ label: 'Pricing', defaultValue: true }),
+    blog: fields.checkbox({ label: 'Blog', defaultValue: true }),
+    faqs: fields.checkbox({ label: 'FAQs', defaultValue: true }),
+    contact: fields.checkbox({ label: 'Contact', defaultValue: true }),
+    privacy: fields.checkbox({ label: 'Privacy Policy', defaultValue: true }),
+    terms: fields.checkbox({ label: 'Terms of Service', defaultValue: true }),
+  },
+  { label: 'Published Pages' },
+);
 
 const serviceItem = fields.object({
   title: fields.text({ label: 'Title' }),
@@ -58,11 +73,6 @@ const servicesOffering = fields.object({
     label: 'Bullet Points',
     itemLabel: (props) => props.value ?? 'Bullet',
   }),
-});
-
-const statItem = fields.object({
-  value: fields.text({ label: 'Value' }),
-  label: fields.text({ label: 'Label' }),
 });
 
 const testimonialItem = fields.object({
@@ -169,6 +179,7 @@ export default config({
           label: 'Shared CTA Points',
           itemLabel: (props) => props.value ?? 'Point',
         }),
+        pagesEnabled,
         navLinks: fields.array(navLink, {
           label: 'Primary Navigation',
           itemLabel: (props) => props.fields.label.value,
@@ -192,11 +203,8 @@ export default config({
           label: 'Hero Trust Avatars',
           itemLabel: () => 'Avatar',
         }),
-        servicesEyebrow: fields.text({ label: 'Services Eyebrow' }),
         servicesTitle: fields.text({ label: 'Services Title' }),
         servicesDescription: fields.text({ label: 'Services Description', multiline: true }),
-        featuresTitle: fields.text({ label: 'Features Title' }),
-        featuresDescription: fields.text({ label: 'Features Description', multiline: true }),
         whyEyebrow: fields.text({ label: 'How It Works Eyebrow' }),
         whyTitle: fields.text({ label: 'How It Works Title' }),
         whyDescription: fields.text({ label: 'How It Works Description', multiline: true }),
@@ -233,14 +241,16 @@ export default config({
           label: 'How It Works Steps',
           itemLabel: (props) => props.fields.title.value,
         }),
-        stats: fields.array(statItem, {
-          label: 'Stats',
-          itemLabel: (props) => props.fields.label.value,
-        }),
-        carriers: fields.array(fields.text({ label: 'Carrier' }), {
-          label: 'Carrier Logos / Names',
-          itemLabel: (props) => props.value ?? 'Carrier',
-        }),
+        carriers: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Carrier Name' }),
+            logo: imageField('Logo', 'carriers'),
+          }),
+          {
+            label: 'Carrier Logos',
+            itemLabel: (props) => props.fields.name.value,
+          },
+        ),
         testimonials: fields.array(testimonialItem, {
           label: 'Testimonials',
           itemLabel: (props) => props.fields.name.value,

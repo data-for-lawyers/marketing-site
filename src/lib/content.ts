@@ -1,6 +1,8 @@
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import { resolveCmsImage, resolveCmsImages } from './images';
+import { getVisibleNavLinks } from './nav';
+import { DEFAULT_PAGES_ENABLED } from './pages';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -12,11 +14,18 @@ function requireContent<T>(value: T | null, path: string): T {
 }
 
 function normalizeSite(site: NonNullable<Awaited<ReturnType<typeof reader.singletons.site.read>>>) {
+  const pagesEnabled = {
+    ...DEFAULT_PAGES_ENABLED,
+    ...(site.pagesEnabled ?? {}),
+  };
+
   return {
     ...site,
+    pagesEnabled,
     logoUrl: resolveCmsImage(site.logoUrl, '/images/site/'),
     logoLightUrl: resolveCmsImage(site.logoLightUrl, '/images/site/'),
     ctaImageUrl: resolveCmsImage(site.ctaImageUrl, '/images/site/'),
+    navLinks: getVisibleNavLinks(site.navLinks, pagesEnabled),
   };
 }
 
@@ -31,6 +40,14 @@ function normalizeHomepage(
       ...service,
       image: resolveCmsImage(service.image, '/images/homepage/services/'),
     })),
+    carriers: homepage.carriers.map((carrier) =>
+      typeof carrier === 'string'
+        ? { name: carrier, logo: '' }
+        : {
+            name: carrier.name,
+            logo: resolveCmsImage(carrier.logo, '/images/carriers/'),
+          },
+    ),
     testimonials: homepage.testimonials.map((item) => ({
       ...item,
       image: resolveCmsImage(item.image, '/images/homepage/testimonials/'),

@@ -1,0 +1,42 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQ from '../../components/FAQ.astro';
+import AboutCta from '../../components/AboutCta.astro';
+import { getFaqsContent, getSharedCta } from '../../lib/content';
+
+const { site, faqs } = await getFaqsContent();
+const cta = getSharedCta(site);
+---
+
+<SiteLayout title={faqs.title} description={faqs.description}>
+  <PageHero eyebrow={faqs.eyebrow} title={faqs.heroTitle} />
+
+  <FAQ title={faqs.title} description={faqs.description} items={faqs.items} />
+
+  {
+    faqs.footerNote && (
+      <section class="section section-light !pt-0">
+        <div class="container-site max-w-3xl text-center">
+          <p class="body-copy">{faqs.footerNote}</p>
+          <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href={`mailto:${site.email}`} class="text-link">
+              {site.email}
+            </a>
+            <a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`} class="text-link">
+              {site.phone}
+            </a>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <AboutCta
+    title={cta.title}
+    primaryLabel={cta.primaryLabel}
+    primaryUrl={site.signInUrl}
+    points={cta.points}
+    imageUrl={cta.imageUrl}
+  />
+</SiteLayout>

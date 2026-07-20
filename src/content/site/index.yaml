@@ -1,0 +1,37 @@
+companyName: Data for Lawyers
+tagline: The Legal Industry's Most Advanced Source for Digital Records
+phone: (866) 425-9564
+email: info@dataforlawyers.com
+demoUrl: https://www.dataforlawyers.com/
+signInUrl: https://dev-app.dataforlawyers.com/user/login
+logoUrl: /images/site/logo.svg
+logoLightUrl: /images/site/logo-light.svg
+privacyUrl: https://www.dataforlawyers.com/privacy-policy/
+termsUrl: https://www.dataforlawyers.com/terms-of-service/
+linkedInUrl: https://www.linkedin.com/company/data-for-lawyers
+headerCtaLabel: Get in touch
+headerCtaUrl: /contact-us
+signInLabel: Log in
+demoCtaLabel: Book a demo
+footerCompanyHeading: Company
+footerResourcesHeading: Resources
+footerGetStartedHeading: Get started
+copyrightSuffix: All rights reserved.
+ctaTitle: Work with Experts to Move Records Faster
+ctaPrimaryLabel: Get started
+ctaImageUrl: /images/site/cta.jpg
+ctaPoints:
+  - Schedule a free consultation
+  - Get tailored records solutions
+  - Build a stronger case workflow
+navLinks:
+  - label: Services
+    href: /services
+  - label: About Us
+    href: /about-us
+  - label: Pricing
+    href: /pricing
+  - label: Blog
+    href: /blog
+  - label: FAQs
+    href: /faqs

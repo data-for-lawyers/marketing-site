@@ -1,0 +1,54 @@
+title: Pricing
+eyebrow: Pricing
+heroTitle: Plans Built for Legal Records Teams
+introTitle: Choose the Right Plan for Your Firm
+intro: >-
+  Choose a plan that fits your firm’s records retrieval needs, with support that
+  scales as your caseload grows.
+description: >-
+  Choose a plan that fits your firm’s records retrieval needs, with support that
+  scales as your caseload grows.
+plans:
+  - name: Starter
+    description: >-
+      Best for small teams getting started with records requests and basic
+      platform support.
+    price: $0
+    period: /month
+    badge: ''
+    featured: false
+    cta: Start Starter
+    features:
+      - Basic request setup
+      - Limited platform access
+      - Up to 5 team members
+      - Standard support
+  - name: Growth
+    description: >-
+      Ideal for growing firms that need to optimize records workflows and scale.
+    price: $49
+    period: /month
+    badge: Popular
+    featured: true
+    cta: Start Growth
+    features:
+      - Advanced request workflows
+      - Carrier process optimization
+      - Up to 20 team members
+      - Priority support
+      - Performance tracking
+  - name: Business
+    description: >-
+      Designed for established firms needing full records support and dedicated
+      guidance.
+    price: $99
+    period: /month
+    badge: ''
+    featured: false
+    cta: Start Business
+    features:
+      - Full platform integration
+      - Strategic records support
+      - Unlimited team members
+      - Dedicated advisor
+      - Advanced analytics

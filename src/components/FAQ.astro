@@ -1,0 +1,59 @@
+---
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+interface Props {
+  title: string;
+  description?: string;
+  items: readonly FaqItem[];
+  showAllLink?: boolean;
+  browseAllLabel?: string;
+}
+
+const {
+  title,
+  description = 'Find clear and concise answers to common questions about our process, services, and how we support legal teams.',
+  items,
+  showAllLink = false,
+  browseAllLabel = 'Browse all FAQs →',
+} = Astro.props;
+---
+
+<section id="faq" class="section section-light faq-section">
+  <div class="container-site faq-layout">
+    <div class="faq-intro reveal is-visible" data-reveal>
+      <h2 class="faq-title">{title}</h2>
+      <p class="faq-description">{description}</p>
+      {
+        showAllLink && (
+          <a href="/faqs" class="text-link faq-all-link">
+            {browseAllLabel}
+          </a>
+        )
+      }
+    </div>
+
+    <div class="faq-list reveal" data-reveal data-accordion>
+      {
+        items.map((item, index) => (
+          <div class:list={['faq-item', index === 0 && 'is-open']}>
+            <button
+              type="button"
+              class="faq-item-button"
+              data-accordion-button
+              aria-expanded={index === 0 ? 'true' : 'false'}
+            >
+              <span class="faq-item-question">{item.question}</span>
+              <span class="faq-item-icon" aria-hidden="true" />
+            </button>
+            <div class:list={['faq-item-panel', 'accordion-panel', index === 0 && 'open']}>
+              <p>{item.answer}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

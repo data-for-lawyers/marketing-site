@@ -1,0 +1,40 @@
+---
+type Testimonial = {
+  name: string;
+  role: string;
+  quote: string;
+};
+
+interface Props {
+  title: string;
+  description: string;
+  items: readonly Testimonial[];
+}
+
+const { title, description, items } = Astro.props;
+---
+
+<section class="section section-light">
+  <div class="container-site section-stack">
+    <div class="reveal text-center" data-reveal>
+      <h2>{title}</h2>
+      <p class="section-copy mx-auto mt-4 max-w-2xl">{description}</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3">
+      {
+        items.map((item, index) => (
+          <article
+            class="testimonial-card reveal"
+            data-reveal
+            style={`--reveal-delay: ${index * 80}ms`}
+          >
+            <p class="testimonial-quote">“{item.quote}”</p>
+            <p class="testimonial-name">{item.name}</p>
+            <p class="testimonial-role">{item.role}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

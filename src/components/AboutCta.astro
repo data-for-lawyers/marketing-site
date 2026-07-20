@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  primaryLabel: string;
+  primaryUrl: string;
+  points?: readonly string[];
+  imageUrl: string;
+}
+
+const {
+  title,
+  primaryLabel,
+  primaryUrl,
+  points = [],
+  imageUrl,
+} = Astro.props;
+---
+
+<section class="section section-light">
+  <div class="container-site">
+    <div class="about-cta reveal" data-reveal>
+      <div class="about-cta-copy">
+        <h2>{title}</h2>
+        <a href={primaryUrl} class="btn btn-primary mt-8">{primaryLabel}</a>
+        {
+          points.length > 0 && (
+            <ul class="about-cta-list">
+              {points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+      <div class="about-cta-media">
+        <img src={imageUrl} alt="" />
+      </div>
+    </div>
+  </div>
+</section>

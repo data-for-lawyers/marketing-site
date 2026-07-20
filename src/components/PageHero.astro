@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+}
+
+const { title, eyebrow } = Astro.props;
+---
+
+<section class="page-hero-band">
+  <div class="container-site">
+    <div class="page-hero-band-inner reveal is-visible" data-reveal>
+      {eyebrow && <p class="page-hero-band-eyebrow">{eyebrow}</p>}
+      <h1 class="page-hero-band-title">{title}</h1>
+    </div>
+  </div>
+</section>

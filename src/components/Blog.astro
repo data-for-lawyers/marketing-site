@@ -1,0 +1,43 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import BlogCard from './BlogCard.astro';
+import { formatPostDate, getPublishedPostSummaries } from '../lib/posts';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+
+const { eyebrow, title, description } = Astro.props;
+const posts = (await getPublishedPostSummaries()).slice(0, 3);
+---
+
+<section id="blog" class="section section-muted">
+  <div class="container-site section-stack">
+    <SectionHeader eyebrow={eyebrow} title={title} description={description}>
+      <a href="/blog" class="btn btn-secondary mt-2">View All Posts</a>
+    </SectionHeader>
+
+    {
+      posts.length > 0 ? (
+        <div class="grid gap-8 md:grid-cols-3">
+          {posts.map((post) => (
+            <BlogCard
+              href={`/blog/${post.slug}`}
+              title={post.title}
+              excerpt={post.excerpt}
+              date={formatPostDate(post.publishedDate)}
+              author={post.author}
+              image={post.coverImage}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="body-copy">
+          No posts yet. <a href="/keystatic" class="text-link">Create your first post</a> in the CMS.
+        </p>
+      )
+    }
+  </div>
+</section>

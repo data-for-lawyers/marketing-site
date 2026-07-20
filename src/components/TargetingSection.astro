@@ -1,0 +1,51 @@
+---
+const points = [
+  'Grow case efficiency with confidence.',
+  'Customize workflows and automations.',
+  'Visual insights with interactive reporting.',
+];
+---
+
+<section class="section section-dark !pt-0">
+  <div class="container-site grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <div class="reveal order-2 lg:order-1" data-reveal>
+      <div class="rounded-[1.5rem] bg-white p-5 shadow-[var(--shadow-lg)]">
+        <div class="mb-4 flex items-center justify-between">
+          <p class="text-sm font-bold text-[var(--color-ink)]">Audience Reports</p>
+          <span class="text-[var(--color-muted)]">•••</span>
+        </div>
+        <div class="flex h-48 items-end justify-between gap-2 px-2">
+          {
+            [40, 55, 35, 70, 48, 90, 60, 45, 75, 50].map((h, i) => (
+              <div
+                class:list={['w-full rounded-t-md', i === 5 ? 'bg-[var(--color-copper)]' : 'bg-[var(--color-jade)]']}
+                style={`height: ${h}%`}
+              />
+            ))
+          }
+        </div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-xl bg-[var(--color-surface)] p-3">
+            <p class="text-xs text-[var(--color-muted)]">Email subscribers</p>
+            <p class="text-lg font-bold text-[var(--color-ink)]">15,678</p>
+          </div>
+          <div class="rounded-xl bg-[var(--color-surface)] p-3">
+            <p class="text-xs text-[var(--color-muted)]">SMS subscribers</p>
+            <p class="text-lg font-bold text-[var(--color-ink)]">15,678</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal order-1 lg:order-2" data-reveal>
+      <h2 class="text-white">Accurate targeting to boost your revenue</h2>
+      <p class="section-copy mt-4">
+        Send the correct request to the right carrier at the right time. Segment matters by campaign
+        activity, request type, and deadlines to keep every case moving.
+      </p>
+      <ul class="check-list mt-8">
+        {points.map((point) => <li>{point}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

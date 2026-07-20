@@ -1,0 +1,39 @@
+---
+type Props = {
+  href: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  image?: string;
+};
+
+const { href, title, excerpt, date, author, image } = Astro.props;
+---
+
+<article class="group relative">
+  <a href={href} class="absolute inset-0 z-10" aria-label={`Read ${title}`}></a>
+
+  {
+    image ? (
+      <div class="overflow-hidden">
+        <img
+          src={image}
+          alt=""
+          class="media-cover media-3-4 w-full transition duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
+    ) : (
+      <div class="media-cover media-3-4 flex w-full items-end bg-teal p-6 text-white">
+        <span class="font-display text-2xl leading-tight">{title}</span>
+      </div>
+    )
+  }
+
+  <div class="relative mt-4">
+    <p class="text-xs uppercase tracking-[0.16em] text-teal">{date} · {author}</p>
+    <h3 class="mt-2 text-xl leading-snug text-ink">{title}</h3>
+    <p class="body-copy mt-3">{excerpt}</p>
+    <span class="text-link mt-4 inline-block">Read More →</span>
+  </div>
+</article>

@@ -1,0 +1,44 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+type Column = {
+  title: string;
+  description: string;
+  bullets: readonly string[];
+};
+
+interface Props {
+  title: string;
+  description: string;
+  other: Column;
+  ours: Column;
+}
+
+const { title, description, other, ours } = Astro.props;
+---
+
+<section class="section section-light">
+  <div class="container-site section-stack">
+    <div class="reveal" data-reveal>
+      <SectionHeader title={title} description={description} align="center" />
+    </div>
+
+    <div class="compare-grid">
+      <article class="compare-card is-muted reveal" data-reveal>
+        <h3 class="compare-title">{other.title}</h3>
+        <p class="compare-desc">{other.description}</p>
+        <ul class="compare-list">
+          {other.bullets.map((bullet) => <li>{bullet}</li>)}
+        </ul>
+      </article>
+
+      <article class="compare-card is-accent reveal" data-reveal style="--reveal-delay: 90ms">
+        <h3 class="compare-title">{ours.title}</h3>
+        <p class="compare-desc">{ours.description}</p>
+        <ul class="compare-list">
+          {ours.bullets.map((bullet) => <li>{bullet}</li>)}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>

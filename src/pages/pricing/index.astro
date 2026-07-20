@@ -1,0 +1,223 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import AboutCta from '../../components/AboutCta.astro';
+import { getPricingContent, getSharedCta } from '../../lib/content';
+
+const { site, pricing } = await getPricingContent();
+const cta = getSharedCta(site);
+---
+
+<SiteLayout title={pricing.title} description={pricing.description}>
+  <PageHero eyebrow={pricing.eyebrow} title={pricing.heroTitle} />
+
+  <section id="pricing-section" class="section section-light">
+    <div class="container-site">
+      <PageIntro title={pricing.introTitle} description={pricing.intro} />
+
+      <div class="page-panel pricing-panel reveal" data-reveal style="--reveal-delay: 80ms">
+        {
+          pricing.plans.map((plan) => (
+            <article class:list={['pricing-card', plan.featured && 'is-featured']}>
+              <div class="pricing-card-top">
+                <div class="pricing-card-heading">
+                  <h3>{plan.name}</h3>
+                  {plan.badge && <span class="pricing-badge">{plan.badge}</span>}
+                </div>
+                <p class="pricing-card-desc">{plan.description}</p>
+                <div class="pricing-card-price">
+                  <span class="pricing-amount">{plan.price}</span>
+                  <span class="pricing-period">{plan.period}</span>
+                </div>
+              </div>
+
+              <ul class="pricing-features">
+                {plan.features.map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+
+              <a href={site.signInUrl} class:list={['pricing-cta', plan.featured ? 'is-primary' : 'is-muted']}>
+                {plan.cta}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <AboutCta
+    title={cta.title}
+    primaryLabel={cta.primaryLabel}
+    primaryUrl={site.signInUrl}
+    points={cta.points}
+    imageUrl={cta.imageUrl}
+  />
+</SiteLayout>
+
+<style is:global>
+  @media (min-width: 960px) {
+    .pricing-panel {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      padding: 0.9rem;
+    }
+  }
+
+  .pricing-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.6rem 1.4rem 1.4rem;
+    border-radius: 1.35rem;
+    background: transparent;
+    color: var(--color-ink);
+  }
+
+  .pricing-card.is-featured {
+    background: var(--color-forest);
+    color: var(--color-white);
+  }
+
+  .pricing-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .pricing-card h3 {
+    font-size: 1.85rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: inherit;
+  }
+
+  .pricing-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.65rem;
+    border-radius: 9999px;
+    background: var(--color-copper);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .pricing-card-desc {
+    margin-top: 0.85rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    min-height: 4.2rem;
+  }
+
+  .pricing-card.is-featured .pricing-card-desc {
+    color: rgb(255 255 255 / 0.68);
+  }
+
+  .pricing-card-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-top: 1.35rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-echo);
+  }
+
+  .pricing-card.is-featured .pricing-card-price {
+    border-bottom-color: rgb(255 255 255 / 0.14);
+  }
+
+  .pricing-amount {
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .pricing-period {
+    color: var(--color-muted);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .pricing-card.is-featured .pricing-period {
+    color: rgb(255 255 255 / 0.65);
+  }
+
+  .pricing-features {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .pricing-features li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.1rem;
+    border-radius: 0.25rem;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 0.65rem no-repeat,
+      var(--color-forest);
+  }
+
+  .pricing-card.is-featured .pricing-features li::before {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 0.65rem no-repeat,
+      var(--color-copper);
+  }
+
+  .pricing-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    width: 100%;
+    border-radius: 0.65rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .pricing-cta.is-muted {
+    background: var(--color-frost);
+    color: var(--color-ink);
+  }
+
+  .pricing-cta.is-muted:hover {
+    background: var(--color-echo);
+    transform: translateY(-1px);
+  }
+
+  .pricing-cta.is-primary {
+    background: var(--color-copper);
+    color: var(--color-white);
+  }
+
+  .pricing-cta.is-primary:hover {
+    background: var(--color-cta-hover);
+    color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+</style>

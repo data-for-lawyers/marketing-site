@@ -1,0 +1,25 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  image: string;
+}
+
+const { eyebrow, title, description, ctaLabel, ctaUrl, image } = Astro.props;
+---
+
+<section class="section section-dark">
+  <div class="container-site grid items-center gap-12 lg:grid-cols-2">
+    <img src={image} alt="" class="media-cover media-16-10 w-full" />
+
+    <div>
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} tone="light" />
+      <a href={ctaUrl} class="btn btn-primary mt-8">{ctaLabel}</a>
+    </div>
+  </div>
+</section>

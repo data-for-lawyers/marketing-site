@@ -1,0 +1,27 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Contact from '../../components/Contact.astro';
+import { getContactContent } from '../../lib/content';
+
+const { site, contact } = await getContactContent();
+---
+
+<SiteLayout title={contact.title} description={contact.description}>
+  <PageHero title={contact.title} eyebrow={contact.eyebrow} />
+
+  <Contact
+    eyebrow={contact.sectionEyebrow}
+    title={contact.formTitle}
+    description={contact.description}
+    ctaLabel={contact.sideCtaLabel}
+    ctaUrl={site.demoUrl}
+    phone={site.phone}
+    email={site.email}
+    submitLabel={contact.formSubmitLabel}
+    namePlaceholder={contact.namePlaceholder}
+    phonePlaceholder={contact.phonePlaceholder}
+    emailPlaceholder={contact.emailPlaceholder}
+    messagePlaceholder={contact.messagePlaceholder}
+  />
+</SiteLayout>

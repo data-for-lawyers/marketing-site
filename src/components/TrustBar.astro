@@ -1,0 +1,25 @@
+---
+const stats = [
+  { value: '30+', label: 'Major carriers supported' },
+  { value: '100%', label: 'Authenticated delivery workflow' },
+  { value: '24/7', label: 'Request status visibility' },
+  { value: 'TX', label: 'Legal process expertise' },
+];
+---
+
+<section class="border-y border-[var(--color-border)] bg-white py-7">
+  <div class="container-site grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    {
+      stats.map((stat, index) => (
+        <div
+          class="reveal"
+          data-reveal
+          style={`--reveal-delay: ${index * 80}ms`}
+        >
+          <p class="text-[1.75rem] font-bold tracking-[-0.03em] text-teal tabular-nums">{stat.value}</p>
+          <p class="mt-1 text-sm text-[var(--color-muted)]">{stat.label}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

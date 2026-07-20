@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getSite } from '../lib/content';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const site = await getSite();
+---
+
+<BaseLayout title={`${title} | ${site.companyName}`} description={description ?? site.tagline}>
+  <div class="bg-[var(--color-forest)]">
+    <Header
+      logoUrl={site.logoLightUrl || site.logoUrl}
+      phone={site.phone}
+      ctaLabel={site.headerCtaLabel}
+      ctaUrl={site.headerCtaUrl}
+      signInUrl={site.signInUrl}
+      signInLabel={site.signInLabel}
+      navLinks={site.navLinks}
+    />
+  </div>
+
+  <main>
+    <slot />
+  </main>
+
+  <Footer
+    companyName={site.companyName}
+    tagline={site.tagline}
+    phone={site.phone}
+    email={site.email}
+    linkedInUrl={site.linkedInUrl}
+    demoUrl={site.demoUrl}
+    signInUrl={site.signInUrl}
+    logoUrl={site.logoLightUrl || site.logoUrl}
+    demoCtaLabel={site.demoCtaLabel}
+    signInLabel={site.signInLabel}
+    companyHeading={site.footerCompanyHeading}
+    resourcesHeading={site.footerResourcesHeading}
+    getStartedHeading={site.footerGetStartedHeading}
+    copyrightSuffix={site.copyrightSuffix}
+    navLinks={site.navLinks}
+  />
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+type Item = {
+  title: string;
+  description: string;
+};
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: readonly Item[];
+  image: string;
+}
+
+const { eyebrow, title, description, items, image } = Astro.props;
+---
+
+<section id="about" class="section section-muted">
+  <div class="container-site grid items-center gap-14 lg:grid-cols-2">
+    <div class="section-stack">
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+
+      <div data-accordion>
+        {
+          items.map((item) => (
+            <div class="accordion-item">
+              <button type="button" class="accordion-button" data-accordion-button aria-expanded="false">
+                {item.title}
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-panel-inner">
+                  <p class="body-copy pb-5 pr-4">{item.description}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <img src={image} alt="" class="media-cover media-4-3 w-full" />
+  </div>
+</section>

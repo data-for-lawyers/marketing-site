@@ -1,0 +1,19 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const items = Array.from({ length: 6 }, () => text);
+---
+
+<section class="overflow-hidden border-y border-teal/10 bg-cream py-6" aria-hidden="true">
+  <div class="marquee-track">
+    {
+      items.flatMap((item) => [
+        <span class="marquee-item">{item}</span>,
+        <span class="marquee-item text-orange">•</span>,
+      ])
+    }
+  </div>
+</section>

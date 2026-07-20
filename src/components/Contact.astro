@@ -1,0 +1,68 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  phone: string;
+  email: string;
+  submitLabel?: string;
+  namePlaceholder?: string;
+  phonePlaceholder?: string;
+  emailPlaceholder?: string;
+  messagePlaceholder?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  ctaLabel,
+  ctaUrl,
+  phone,
+  email,
+  submitLabel = 'Send Message',
+  namePlaceholder = 'Name',
+  phonePlaceholder = 'Phone',
+  emailPlaceholder = 'Email Address',
+  messagePlaceholder = 'Message',
+} = Astro.props;
+const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
+---
+
+<section id="contact" class="section section-muted">
+  <div class="container-site">
+    <div
+      class="reveal grid gap-10 rounded-[1.5rem] border border-[var(--color-border)] bg-white p-8 md:p-12 lg:grid-cols-2"
+      data-reveal
+    >
+      <div>
+        <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={ctaUrl} class="btn btn-dark">{ctaLabel}</a>
+          <a href={phoneHref} class="btn btn-outline">{phone}</a>
+        </div>
+        <a
+          href={`mailto:${email}`}
+          class="mt-6 inline-block text-sm font-semibold text-[var(--color-ink)] no-underline"
+        >
+          {email}
+        </a>
+      </div>
+
+      <form class="grid gap-4" action="#" method="post">
+        <input class="form-input" type="text" name="name" placeholder={namePlaceholder} required />
+        <input class="form-input" type="tel" name="phone" placeholder={phonePlaceholder} />
+        <input class="form-input" type="email" name="email" placeholder={emailPlaceholder} required />
+        <textarea
+          class="form-input min-h-[140px] resize-none"
+          name="message"
+          placeholder={messagePlaceholder}></textarea>
+        <button type="submit" class="btn btn-primary w-fit">{submitLabel}</button>
+      </form>
+    </div>
+  </div>
+</section>

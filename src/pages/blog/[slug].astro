@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getBlogPageContent } from '../../lib/content';
+import { formatPostDate, getPostPageData, getPublishedPostSummaries } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPostSummaries();
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const slug = Astro.params.slug;
+
+if (!slug) {
+  return new Response(null, { status: 404, statusText: 'Not found' });
+}
+
+const [{ blog }, post] = await Promise.all([getBlogPageContent(), getPostPageData(slug)]);
+
+if (!post) {
+  return new Response(null, { status: 404, statusText: 'Not found' });
+}
+---
+
+<SiteLayout title={post.title} description={post.excerpt}>
+  <article class="section section-light">
+    <div class="container-site">
+      <a href="/blog" class="text-link">{blog.backLabel}</a>
+
+      <header class="mt-8 max-w-3xl">
+        <p class="eyebrow">
+          {formatPostDate(post.publishedDate)} · {post.author}
+        </p>
+        <h1 class="mt-4">{post.title}</h1>
+        <p class="section-copy">{post.excerpt}</p>
+      </header>
+
+      {
+        post.coverImage && (
+          <img
+            src={post.coverImage}
+            alt=""
+            class="media-cover media-16-10 mt-10 w-full max-w-4xl"
+          />
+        )
+      }
+
+      <div class="prose mt-10 max-w-3xl" set:html={post.html} />
+    </div>
+  </article>
+</SiteLayout>

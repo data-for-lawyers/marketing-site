@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  tone?: 'default' | 'light' | 'dark';
+}
+
+const { eyebrow, title, description, align = 'left', tone = 'default' } = Astro.props;
+const isDark = tone === 'light' || tone === 'dark';
+---
+
+<div class:list={['section-header', align === 'center' && 'is-center']}>
+  {
+    eyebrow && (
+      <p class:list={['badge', isDark && 'badge-dark', 'mb-4']}>{eyebrow}</p>
+    )
+  }
+  <h2 class:list={[isDark ? 'text-white' : 'text-[var(--color-ink)]']}>{title}</h2>
+  {description && <p class="section-copy">{description}</p>}
+</div>

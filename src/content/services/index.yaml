@@ -1,0 +1,61 @@
+title: Services
+eyebrow: Services
+subtitle: Records Retrieval. Simplified.
+introTitle: Records retrieval, simplified
+intro: >-
+  Data for Lawyers supports the preparation and management of mobile carrier and
+  third-party records requests through the appropriate legal process. Whether
+  your jurisdiction requires a subpoena, a Deposition Upon Written Questions
+  (DWQ), or another authorized method, our platform helps legal professionals
+  organize requests, track progress, and manage records efficiently from start
+  to finish.
+offeringsLabel: Data for Lawyers helps you
+loadMoreLabel: Load More
+features:
+  - title: Prepare Requests
+    description: Create organized, complete requests using standardized workflows.
+    image: /images/services/feature-1.jpg
+  - title: Track Progress
+    description: Monitor status and deadlines from submission through final delivery.
+    image: /images/services/feature-2.jpg
+  - title: Secure Management
+    description: >-
+      Store requests, correspondence, and records in one secure, centralized
+      platform.
+    image: /images/services/feature-3.jpg
+  - title: Authenticated Records
+    description: Receive records with supporting documentation in an easy-to-manage format.
+    image: /images/services/feature-4.jpg
+offerings:
+  - title: Subpoena-Based Record Requests
+    description: >-
+      Many jurisdictions permit mobile carrier and third-party records to be
+      obtained through a subpoena. Data for Lawyers streamlines the preparation,
+      tracking, and management of subpoena-based requests while helping legal
+      professionals maintain organized documentation throughout the records
+      retrieval process.
+    image: /images/services/offering-1.jpg
+    bullets:
+      - Prepare complete records requests
+      - Organize supporting documentation
+      - Track request status and deadlines
+      - Manage carrier communications
+      - Receive authenticated records, when available
+  - title: Deposition Upon Written Questions (DWQs)
+    description: >-
+      Where required, a DWQ provides the legal mechanism for obtaining
+      authenticated business records from a records custodian. Data for Lawyers
+      simplifies the administrative side of the process by helping legal
+      professionals prepare, monitor, and manage DWQ requests from submission
+      through records delivery.
+    image: /images/services/offering-2.jpg
+    bullets:
+      - Prepare DWQ packages
+      - Track carrier and custodian responses
+      - Organize supporting documentation
+      - Manage request timelines
+      - Maintain a centralized record of each request
+ctaTitle: Ready to Simplify Records Retrieval?
+ctaDescription: >-
+  See how Data for Lawyers helps legal professionals streamline records requests
+  from preparation through authenticated delivery.

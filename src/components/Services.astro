@@ -1,0 +1,56 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+type Service = {
+  title: string;
+  description: string;
+  bullets?: readonly string[];
+  image?: string | null;
+};
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+  services: readonly Service[];
+}
+
+const { title, description, services } = Astro.props;
+const featured = services.filter((service) => service.image).slice(0, 3);
+---
+
+<section id="platform" class="section section-light">
+  <div class="container-site section-stack">
+    <div class="reveal" data-reveal>
+      <SectionHeader
+        title={title}
+        description={description}
+        align="center"
+      />
+    </div>
+
+    <div class="image-gallery">
+      {
+        featured.map((service, index) => (
+          <a
+            href="/services"
+            class="gallery-card reveal"
+            data-reveal
+            style={`--reveal-delay: ${index * 80}ms`}
+          >
+            <img src={service.image!} alt={service.title} />
+            <div class="service-card-tag">
+              <h3 class="service-card-tag-label">{service.title}</h3>
+              <p class="service-card-tag-desc">{service.description}</p>
+              <span class="service-card-tag-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17L17 7M9 7h8v8" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

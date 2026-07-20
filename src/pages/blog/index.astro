@@ -1,0 +1,96 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import AboutCta from '../../components/AboutCta.astro';
+import { getBlogPageContent, getSharedCta } from '../../lib/content';
+import { formatBlogCardDate, getPublishedPostSummaries } from '../../lib/posts';
+
+const { site, blog } = await getBlogPageContent();
+const cta = getSharedCta(site);
+const posts = await getPublishedPostSummaries();
+const initialCount = 4;
+---
+
+<SiteLayout title={blog.title} description={blog.description}>
+  <PageHero eyebrow={blog.eyebrow} title={blog.heroTitle} />
+
+  <section class="section section-light">
+    <div class="container-site">
+      <PageIntro title={blog.introTitle} description={blog.intro} />
+
+      {
+        posts.length === 0 ? (
+          <p class="body-copy mx-auto max-w-xl text-center">{blog.emptyState}</p>
+        ) : (
+          <>
+            <div class="blog-grid" data-blog-grid data-initial={initialCount}>
+              {posts.map((post, index) => (
+                <a
+                  href={`/blog/${post.slug}`}
+                  class:list={['blog-card', 'reveal', index >= initialCount && 'is-hidden']}
+                  data-reveal
+                  data-blog-card
+                  style={`--reveal-delay: ${(index % initialCount) * 70}ms`}
+                >
+                  <div class="blog-card-media">
+                    <img
+                      src={post.coverImage || blog.defaultCoverImage}
+                      alt=""
+                    />
+                    <span class="blog-card-date">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                        <path d="M3 10h18M8 3v4M16 3v4" />
+                      </svg>
+                      {formatBlogCardDate(post.publishedDate)}
+                    </span>
+                  </div>
+                  <div class="blog-card-footer">
+                    <h2 class="blog-card-title">{post.title}</h2>
+                    <span class="blog-card-arrow" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {posts.length > initialCount && (
+              <div class="blog-load-more">
+                <button type="button" class="btn btn-primary" data-blog-load-more>
+                  {blog.loadMoreLabel}
+                </button>
+              </div>
+            )}
+          </>
+        )
+      }
+    </div>
+  </section>
+
+  <AboutCta
+    title={cta.title}
+    primaryLabel={cta.primaryLabel}
+    primaryUrl={site.signInUrl}
+    points={cta.points}
+    imageUrl={cta.imageUrl}
+  />
+</SiteLayout>

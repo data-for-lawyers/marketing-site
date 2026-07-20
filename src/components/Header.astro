@@ -1,0 +1,93 @@
+---
+import { defaultNavLinks, type NavLink } from '../lib/nav';
+
+interface Props {
+  logoUrl: string;
+  phone?: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  signInUrl: string;
+  signInLabel?: string;
+  navLinks?: readonly NavLink[];
+}
+
+const {
+  logoUrl,
+  ctaLabel,
+  ctaUrl,
+  signInUrl,
+  signInLabel = 'Log in',
+  navLinks = defaultNavLinks,
+} = Astro.props;
+const currentPath = Astro.url.pathname;
+const links = navLinks.length ? navLinks : defaultNavLinks;
+---
+
+<header class="site-header">
+  <div class="container-site flex min-h-[5.25rem] items-center justify-between gap-6">
+    <a href="/" class="flex items-center no-underline">
+      <img src={logoUrl} alt="Data for Lawyers" class="h-12 w-auto sm:h-14" />
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+      {
+        links.map((item) => (
+          <a
+            href={item.href}
+            class:list={['nav-link', currentPath === item.href && 'is-active']}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href={signInUrl} class="nav-link hidden md:inline">{signInLabel}</a>
+      <a href={ctaUrl} class="btn btn-primary btn-sm hidden sm:inline-flex">{ctaLabel}</a>
+      <button
+        id="menu-toggle"
+        type="button"
+        class="relative z-[70] rounded-lg border border-white/20 p-2.5 text-white lg:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          data-menu-icon="open"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg
+          data-menu-icon="close"
+          xmlns="http://www.w3.org/2000/svg"
+          class="hidden h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 z-[60] hidden bg-[var(--color-forest)]" aria-hidden="true">
+  <div class="container-site flex min-h-screen flex-col gap-4 pt-28 pb-10">
+    {
+      links.map((item) => (
+        <a href={item.href} data-menu-link class="text-2xl font-semibold text-white no-underline">
+          {item.label}
+        </a>
+      ))
+    }
+    <a href={signInUrl} data-menu-link class="text-lg text-white/75 no-underline">{signInLabel}</a>
+    <a href={ctaUrl} data-menu-link class="btn btn-primary mt-4 w-fit">{ctaLabel}</a>
+  </div>
+</div>

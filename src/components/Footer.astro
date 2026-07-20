@@ -1,0 +1,109 @@
+---
+import { defaultNavLinks, type NavLink } from '../lib/nav';
+
+interface Props {
+  companyName: string;
+  tagline: string;
+  phone: string;
+  email: string;
+  linkedInUrl: string;
+  demoUrl: string;
+  signInUrl: string;
+  logoUrl: string;
+  demoCtaLabel?: string;
+  signInLabel?: string;
+  companyHeading?: string;
+  resourcesHeading?: string;
+  getStartedHeading?: string;
+  copyrightSuffix?: string;
+  navLinks?: readonly NavLink[];
+}
+
+const {
+  companyName,
+  tagline,
+  phone,
+  email,
+  linkedInUrl,
+  demoUrl,
+  signInUrl,
+  logoUrl,
+  demoCtaLabel = 'Book a demo',
+  signInLabel = 'Log in',
+  companyHeading = 'Company',
+  resourcesHeading = 'Resources',
+  getStartedHeading = 'Get started',
+  copyrightSuffix = 'All rights reserved.',
+  navLinks = defaultNavLinks,
+} = Astro.props;
+
+const year = new Date().getFullYear();
+const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
+const links = navLinks.length ? [...navLinks] : [...defaultNavLinks];
+
+const companyLinks = [
+  { href: '/about-us', label: 'About Us' },
+  { href: '/services', label: 'Services' },
+  { href: '/contact-us', label: 'Contact' },
+];
+
+const resourceLinks = [
+  ...links.filter((link) => !['/about-us', '/services'].includes(link.href)),
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/terms-of-service', label: 'Terms of Service' },
+  { href: linkedInUrl, label: 'LinkedIn', external: true as const },
+];
+---
+
+<footer class="site-footer">
+  <div class="container-site">
+    <div class="grid gap-10 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+      <div>
+        <a href="/" class="flex items-center no-underline">
+          <img src={logoUrl} alt={companyName} class="h-12 w-auto sm:h-14" />
+        </a>
+        <p class="text-soft mt-4 max-w-xs text-sm leading-7">{tagline}</p>
+      </div>
+
+      <div>
+        <p class="mb-4 text-sm font-semibold">{companyHeading}</p>
+        <div class="grid gap-2.5">
+          {companyLinks.map((link) => <a href={link.href} class="footer-link">{link.label}</a>)}
+        </div>
+      </div>
+
+      <div>
+        <p class="mb-4 text-sm font-semibold">{resourcesHeading}</p>
+        <div class="grid gap-2.5">
+          {
+            resourceLinks.map((link) =>
+              'external' in link && link.external ? (
+                <a href={link.href} class="footer-link" target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                </a>
+              ) : (
+                <a href={link.href} class="footer-link">
+                  {link.label}
+                </a>
+              ),
+            )
+          }
+        </div>
+      </div>
+
+      <div>
+        <p class="mb-4 text-sm font-semibold">{getStartedHeading}</p>
+        <div class="grid gap-2.5">
+          <a href={demoUrl} class="footer-link">{demoCtaLabel}</a>
+          <a href={signInUrl} class="footer-link">{signInLabel}</a>
+          <a href={phoneHref} class="footer-link">{phone}</a>
+          <a href={`mailto:${email}`} class="footer-link">{email}</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-12 border-t border-white/10 pt-6 text-sm text-white/45">
+      © {year} {companyName}. {copyrightSuffix}
+    </p>
+  </div>
+</footer>

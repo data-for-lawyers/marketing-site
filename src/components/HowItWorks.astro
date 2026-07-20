@@ -1,0 +1,47 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+type Item = {
+  title: string;
+  description: string;
+};
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: readonly Item[];
+  signInUrl: string;
+  ctaLabel?: string;
+}
+
+const { title, description, items, signInUrl, ctaLabel = 'Get started' } = Astro.props;
+---
+
+<section id="how-it-works" class="section process-section">
+  <div class="container-site section-stack">
+    <div class="reveal" data-reveal>
+      <SectionHeader title={title} description={description} align="center" />
+    </div>
+
+    <ol class="process-track">
+      {
+        items.map((step, index) => (
+          <li
+            class="process-step reveal"
+            data-reveal
+            style={`--reveal-delay: ${index * 90}ms`}
+          >
+            <span class="process-step-label">Step {index + 1}</span>
+            <h3 class="process-title">{step.title}</h3>
+            <p class="process-desc">{step.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="reveal text-center" data-reveal>
+      <a href={signInUrl} class="btn btn-dark">{ctaLabel}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+const carriers = [
+  'Verizon',
+  'AT&T',
+  'T-Mobile',
+  'Sprint',
+  'US Cellular',
+  'Boost',
+  'Metro',
+  'Cricket',
+  'Google Fi',
+  'Mint',
+  'Visible',
+  'Xfinity',
+];
+---
+
+<section class="section section-muted">
+  <div class="container-site section-stack">
+    <div class="reveal" data-reveal>
+      <SectionHeader
+        eyebrow="Integrations"
+        title="Seamless coverage across major carriers and platforms"
+        description="Connect carrier workflows in one place. Enhance visibility, boost efficiency, and streamline records retrieval."
+        align="center"
+      />
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      {
+        carriers.map((carrier, index) => (
+          <div
+            class="integration-logo reveal"
+            data-reveal
+            style={`--reveal-delay: ${index * 40}ms`}
+          >
+            {carrier}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

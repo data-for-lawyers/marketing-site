@@ -1,0 +1,49 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaUrl: string;
+}
+
+const { eyebrow, title, description, ctaLabel, ctaUrl } = Astro.props;
+---
+
+<section id="about" class="section section-light">
+  <div class="container-site">
+    <div class="reveal-scale grid overflow-hidden rounded-[1.25rem] border border-[var(--color-border)] lg:grid-cols-2" data-reveal>
+      <div class="bg-[var(--color-teal-dark)] p-8 md:p-12 lg:p-14">
+        <SectionHeader eyebrow={eyebrow} title={title} description={description} tone="light" />
+        <ul class="check-list mt-8 [&_li]:text-white/75 [&_li::before]:bg-white/10">
+          <li>Texas-focused legal process expertise</li>
+          <li>Carrier-specific DWQ and subpoena workflows</li>
+          <li>Chain-of-custody documentation on every delivery</li>
+        </ul>
+        <a href={ctaUrl} class="btn btn-primary mt-9">{ctaLabel}</a>
+      </div>
+      <div class="bg-[var(--color-surface)] p-8 md:p-12 lg:p-14">
+        <p class="eyebrow">Trusted by legal teams</p>
+        <p class="heading-display mt-4 text-[1.85rem] leading-snug md:text-[2.15rem]">
+          Built for firms that cannot afford delays or incomplete records.
+        </p>
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          <div class="surface-card p-5">
+            <p class="text-sm font-bold tracking-[0.04em] text-teal">DWQ</p>
+            <p class="mt-2 text-sm leading-6 text-[var(--color-muted)]">
+              Deposition upon written questions, prepared and tracked end to end.
+            </p>
+          </div>
+          <div class="surface-card p-5">
+            <p class="text-sm font-bold tracking-[0.04em] text-teal">Subpoena</p>
+            <p class="mt-2 text-sm leading-6 text-[var(--color-muted)]">
+              Carrier-ready request workflows with organized documentation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

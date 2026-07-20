@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import StatsSection from '../components/StatsSection.astro';
+import Services from '../components/Services.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Comparison from '../components/Comparison.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Footer from '../components/Footer.astro';
+import { getSharedCta, getSiteContent } from '../lib/content';
+
+const { site, homepage } = await getSiteContent();
+const cta = getSharedCta(site);
+
+const features = homepage.services.slice(0, 4).map((service) => ({
+  title: service.title,
+  description: service.description,
+}));
+---
+
+<BaseLayout title={`${site.companyName} | ${site.tagline}`} description={homepage.heroSubtitle}>
+  <Header
+    logoUrl={site.logoLightUrl || site.logoUrl}
+    phone={site.phone}
+    ctaLabel={site.headerCtaLabel}
+    ctaUrl={site.headerCtaUrl}
+    signInUrl={site.signInUrl}
+    signInLabel={site.signInLabel}
+    navLinks={site.navLinks}
+  />
+
+  <main>
+    <Hero
+      title={homepage.heroTitle}
+      subtitle={homepage.heroSubtitle}
+      ctaLabel={homepage.heroCta}
+      ctaUrl={homepage.heroCtaUrl || site.headerCtaUrl}
+      imageUrl={homepage.heroImage}
+      trustCount={homepage.heroTrustCount}
+      trustCopy={homepage.heroTrustCopy}
+      floatLabel={homepage.heroFloatLabel}
+      floatMeta={homepage.heroFloatMeta}
+      avatars={homepage.heroAvatars}
+    />
+
+    <StatsSection stats={homepage.stats} carriers={homepage.carriers} />
+
+    <Services
+      eyebrow={homepage.servicesEyebrow}
+      title={homepage.servicesTitle}
+      description={homepage.servicesDescription}
+      services={homepage.services}
+    />
+
+    <FeaturesSection
+      title={homepage.featuresTitle}
+      description={homepage.featuresDescription}
+      features={features}
+    />
+
+    <HowItWorks
+      eyebrow={homepage.whyEyebrow}
+      title={homepage.whyTitle}
+      description={homepage.whyDescription}
+      items={homepage.whyItems}
+      signInUrl={site.signInUrl}
+      ctaLabel={homepage.whyCtaLabel}
+    />
+
+    <Comparison
+      title={homepage.comparisonTitle}
+      description={homepage.comparisonDescription}
+      other={homepage.comparisonOther}
+      ours={homepage.comparisonOurs}
+    />
+
+    <Testimonials
+      title={homepage.testimonialsTitle}
+      description={homepage.testimonialsDescription}
+      items={homepage.testimonials}
+    />
+
+    <FAQ
+      title={homepage.faqTitle}
+      description={homepage.faqDescription}
+      items={homepage.faqs}
+      showAllLink
+      browseAllLabel={homepage.faqBrowseAllLabel}
+    />
+
+    <CtaBand
+      title={cta.title}
+      description={homepage.ctaDescription}
+      primaryLabel={cta.primaryLabel}
+      primaryUrl={site.signInUrl}
+    />
+  </main>
+
+  <Footer
+    companyName={site.companyName}
+    tagline={site.tagline}
+    phone={site.phone}
+    email={site.email}
+    linkedInUrl={site.linkedInUrl}
+    demoUrl={site.demoUrl}
+    signInUrl={site.signInUrl}
+    logoUrl={site.logoLightUrl}
+    demoCtaLabel={site.demoCtaLabel}
+    signInLabel={site.signInLabel}
+    companyHeading={site.footerCompanyHeading}
+    resourcesHeading={site.footerResourcesHeading}
+    getStartedHeading={site.footerGetStartedHeading}
+    copyrightSuffix={site.copyrightSuffix}
+    navLinks={site.navLinks}
+  />
+</BaseLayout>

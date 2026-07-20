@@ -1,0 +1,254 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import AboutCta from '../../components/AboutCta.astro';
+import { getServicesContent, getSharedCta } from '../../lib/content';
+
+const { site, services } = await getServicesContent();
+const cta = getSharedCta(site);
+
+const serviceItems = [
+  ...services.features.map((item) => ({
+    title: item.title,
+    description: item.description,
+    href: '#offerings',
+    image: item.image,
+  })),
+  ...services.offerings.map((item, index) => ({
+    title: item.title,
+    description: item.description,
+    href: `#offering-${index}`,
+    image: item.image,
+  })),
+].filter((item) => item.image);
+
+const initialCount = 4;
+---
+
+<SiteLayout title={services.title} description={services.intro}>
+  <PageHero eyebrow={services.eyebrow || services.title} title={services.subtitle} />
+
+  <section class="section section-light">
+    <div class="container-site">
+      <PageIntro title={services.introTitle} description={services.intro} />
+
+      <div class="services-grid" data-blog-grid data-initial={initialCount}>
+        {
+          serviceItems.map((item, index) => (
+            <a
+              href={item.href}
+              class:list={['service-card', 'reveal', index >= initialCount && 'is-hidden']}
+              data-reveal
+              data-blog-card
+              style={`--reveal-delay: ${(index % initialCount) * 70}ms`}
+            >
+              <div class="service-card-media">
+                <img src={item.image} alt="" />
+                <div class="service-card-tag">
+                  <h3 class="service-card-tag-label">{item.title}</h3>
+                  <p class="service-card-tag-desc">{item.description}</p>
+                  <span class="service-card-tag-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      {
+        serviceItems.length > initialCount && (
+          <div class="services-load-more">
+            <button type="button" class="btn btn-primary" data-blog-load-more>
+              {services.loadMoreLabel}
+            </button>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section id="offerings" class="section section-light pt-0">
+    <div class="container-site services-offerings">
+      {
+        services.offerings.map((offering, index) => (
+          <article
+            id={`offering-${index}`}
+            class="services-offering reveal"
+            data-reveal
+            style={`--reveal-delay: ${index * 80}ms`}
+          >
+            <div class="services-offering-copy">
+              <h2>{offering.title}</h2>
+              <p>{offering.description}</p>
+            </div>
+            <div class="services-offering-panel">
+              <p class="services-offering-label">{services.offeringsLabel}</p>
+              <ul class="services-offering-list">
+                {offering.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <AboutCta
+    title={services.ctaTitle || cta.title}
+    primaryLabel={cta.primaryLabel}
+    primaryUrl={site.signInUrl}
+    points={cta.points}
+    imageUrl={cta.imageUrl}
+  />
+</SiteLayout>
+
+<style is:global>
+  .services-grid {
+    display: grid;
+    gap: 2rem 1.25rem;
+  }
+
+  @media (min-width: 800px) {
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 1.5rem;
+    }
+  }
+
+  .service-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .service-card.is-hidden {
+    display: none !important;
+  }
+
+  .service-card-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.35rem;
+    aspect-ratio: 16 / 11;
+    background: var(--color-echo);
+  }
+
+  .service-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .service-card:hover .service-card-media img {
+    transform: scale(1.05);
+  }
+
+  .service-card .service-card-tag {
+    width: min(calc(100% - 1.7rem), 22rem);
+  }
+
+  .service-card .service-card-tag-label {
+    margin: 0;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+  }
+
+  .service-card .service-card-tag-desc {
+    margin: 0;
+  }
+
+  .services-load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.75rem;
+  }
+
+  .services-offerings {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .services-offering {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #dfe3dc;
+  }
+
+  @media (min-width: 900px) {
+    .services-offering {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding: 2rem;
+    }
+  }
+
+  .services-offering-copy h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #221f20;
+  }
+
+  .services-offering-copy p {
+    margin-top: 0.9rem;
+    color: #6b736f;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  .services-offering-panel {
+    padding: 1.4rem 1.5rem;
+    border-radius: 1.25rem;
+    background: #f0f2ed;
+  }
+
+  .services-offering-label {
+    margin-bottom: 1rem;
+    color: #221f20;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .services-offering-list {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .services-offering-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: #221f20;
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  .services-offering-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.15rem;
+    border-radius: 0.25rem;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 0.65rem no-repeat,
+      #d18850;
+  }
+</style>

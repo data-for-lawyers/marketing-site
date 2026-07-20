@@ -1,0 +1,202 @@
+heroTitle: Obtain Mobile Carrier & Third-Party Records Faster
+heroSubtitle: >-
+  Automate records requests, track every request, and receive authenticated
+  carrier and third-party records through one secure, organized platform.
+heroImage: /images/homepage/hero.jpg
+heroCta: Get in touch
+heroCtaUrl: /contact-us
+heroTrustCount: 10k+
+heroTrustCopy: Trusted by legal teams nationwide for authenticated records delivery.
+heroFloatLabel: Weekly Performance
+heroFloatMeta: +18% This Week
+heroAvatars:
+  - /images/homepage/avatars/avatar-1.jpg
+  - /images/homepage/avatars/avatar-2.jpg
+  - /images/homepage/avatars/avatar-3.jpg
+servicesEyebrow: Services
+servicesTitle: A Better Way to Retrieve Records
+servicesDescription: >-
+  Prepare, track, and receive authenticated carrier and third-party records
+  through one secure platform.
+featuresTitle: Built for Legal Records Workflows
+featuresDescription: >-
+  Practical capabilities that help teams manage requests from preparation
+  through authenticated delivery.
+whyEyebrow: How it works
+whyTitle: How It Works
+whyDescription: A clear process from request submission through authenticated delivery.
+whyCtaLabel: Get started
+aboutEyebrow: About Us
+aboutTitle: About Data for Lawyers
+aboutDescription: >-
+  Data for Lawyers helps legal professionals prepare, track, and receive
+  authenticated mobile carrier and third-party records through one secure
+  platform.
+aboutCta: Learn More About Us
+comparisonTitle: Why Legal Teams Choose Us Over Manual Processes
+comparisonDescription: >-
+  We focus on delivering tailored records workflows, clear communication, and
+  measurable results that help firms move cases forward with confidence.
+comparisonOther:
+  title: Other Approaches
+  description: >-
+    Fragmented workflows that lack visibility, consistency, and a clear path
+    from request to authenticated delivery.
+  bullets:
+    - Manual, one-off carrier requests
+    - Limited request tracking
+    - Inconsistent documentation
+    - Unclear turnaround expectations
+    - Slow follow-up and communication
+comparisonOurs:
+  title: With Data for Lawyers
+  description: >-
+    A structured platform designed around legal records retrieval, with clarity,
+    performance, and authenticated outcomes.
+  bullets:
+    - Centralized request management
+    - Real-time status visibility
+    - Authenticated, organized delivery
+    - Carrier coverage in one place
+    - Dedicated expert support
+testimonialsTitle: Real Results That Drive Case Progress
+testimonialsDescription: >-
+  Legal teams rely on Data for Lawyers to simplify authenticated records
+  retrieval.
+faqTitle: Frequently Asked Questions About Services
+faqDescription: >-
+  Find clear and concise answers to common questions about our process,
+  services, and how we support legal teams with records retrieval.
+faqBrowseAllLabel: Browse all FAQs →
+ctaDescription: >-
+  Schedule a consultation and see how Data for Lawyers simplifies authenticated
+  carrier and third-party records retrieval.
+contactEyebrow: Have Questions?
+contactTitle: Speak With Our Team
+contactDescription: >-
+  Speak with our team to learn how Data for Lawyers can simplify your records
+  retrieval workflow.
+contactCta: Schedule a Consultation
+services:
+  - title: Efficient Request Management
+    description: Submit requests in minutes through a secure online platform.
+    image: /images/homepage/services/service-1.jpg
+    bullets:
+      - Centralized request management
+      - Real-time status updates
+      - Unlimited request history
+      - Secure document storage
+  - title: Authenticated Document Delivery
+    description: Receive organized, authenticated records ready for legal review.
+    image: /images/homepage/services/service-2.jpg
+    bullets:
+      - Carrier-specific requests
+      - Authenticated PDF production
+      - Complete metadata
+      - Chain-of-custody documentation
+      - Organized delivery
+  - title: Intelligent Automation
+    description: Technology handles repetitive tasks so your team can focus on your case.
+    image: /images/homepage/services/service-3.jpg
+    bullets:
+      - Automated workflows
+      - Request tracking
+      - Quality verification
+      - Faster turnaround
+  - title: Expert Support
+    description: >-
+      When questions arise, our experienced team is available to help with
+      records requests, documentation, and technical questions.
+    image: /images/homepage/services/service-4.jpg
+    bullets:
+      - Dedicated case managers for complex requests
+      - Technical support for data interpretation
+      - Expert consultation for special requirements
+  - title: Results You Can Trust
+    description: Consistent outcomes backed by authenticated delivery and expert support.
+    image: /images/homepage/services/service-5.jpg
+    bullets:
+      - Reduce administrative work
+      - Prepare records faster
+      - Improve organization
+      - Maintain documentation integrity
+      - Deliver consistent results
+whyItems:
+  - title: Submit Request
+    description: Submit your request securely in minutes.
+  - title: We Process
+    description: We handle the request and communicate with carriers.
+  - title: We Verify
+    description: Records are authenticated and prepared with complete data.
+  - title: Receive Records
+    description: Receive organized, authenticated records ready for your case.
+stats:
+  - value: 99%
+    label: Authenticated deliveries
+  - value: 30+
+    label: Carriers supported
+  - value: 24/7
+    label: Request visibility
+carriers:
+  - Verizon
+  - AT&T
+  - T-Mobile
+  - Sprint
+  - US Cellular
+  - Metro
+  - Boost
+  - Cricket
+testimonials:
+  - name: Brandon Altos
+    role: Litigation Partner
+    quote: >-
+      Data for Lawyers transformed our records workflow. Authenticated delivery
+      and real-time tracking made a complex process simple.
+  - name: Lauren Scott
+    role: Case Manager
+    quote: >-
+      The platform saved our team countless hours. Every record arrived
+      authenticated and ready for review.
+  - name: Emily Hughes
+    role: Firm Administrator
+    quote: >-
+      Reliable, secure, and fast. This is now our standard for every carrier and
+      third-party records request.
+faqs:
+  - question: How long do mobile carrier record requests take?
+    answer: >-
+      Response times vary depending on the carrier, jurisdiction, and type of
+      legal request. Data for Lawyers helps manage the process from submission
+      through delivery, providing visibility into the status of your records
+      request every step of the way. Responses are typically due within 30 days
+      of service. Objections must be raised within 15 days. Extensions may be
+      negotiated between parties. Court intervention may modify these
+      timeframes.
+  - question: What records should I request from a mobile carrier?
+    answer: >-
+      The appropriate records depend on the facts of your case. Data for Lawyers
+      helps legal professionals identify and request the records needed for
+      their matter, whether through a DWQ, subpoena, or other authorized legal
+      process.
+  - question: How should questions about phone records be structured?
+    answer: >-
+      A well-prepared request can help minimize delays and improve the quality
+      of records received. Our platform helps ensure requests are organized,
+      complete, and tailored to the records being sought.
+  - question: How are records authenticated?
+    answer: >-
+      Authentication requirements vary by carrier and jurisdiction. Data for
+      Lawyers helps facilitate requests for authenticated, court-ready records
+      whenever available, reducing the need to navigate each carrier's unique
+      requirements independently.
+  - question: What technical details should be requested?
+    answer: >-
+      Mobile carrier records often contain technical information that can affect
+      how the records are interpreted. Data for Lawyers helps ensure important
+      technical details are considered throughout the request process.
+  - question: How should preservation requests be handled?
+    answer: >-
+      When records may be subject to retention limits, acting quickly is
+      important. Data for Lawyers helps streamline preservation requests and
+      other time-sensitive records requests to help reduce the risk of losing
+      potentially relevant information.

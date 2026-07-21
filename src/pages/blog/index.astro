@@ -1,8 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import AboutCta from '../../components/AboutCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { getBlogPageContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
 import { withBase } from '../../lib/paths';
@@ -13,76 +12,106 @@ const disabled = notFoundIfDisabled(site.pagesEnabled, '/blog');
 if (disabled) return disabled;
 const cta = getSharedCta(site);
 const posts = await getPublishedPostSummaries();
+const [featured, ...rest] = posts;
 const initialCount = 4;
 ---
 
 <SiteLayout title={blog.title} description={blog.description}>
   <PageHero eyebrow={blog.eyebrow || blog.title} title={blog.heroTitle || blog.title} />
 
-  <section class="section section-light">
+  <section class="section section-light blog-page">
     <div class="container-site">
-      <PageIntro title={blog.introTitle} description={blog.intro} />
+      <div class="blog-intro reveal" data-reveal>
+        <p class="section-kicker">Insights</p>
+        <h2 class="blog-intro-title">{blog.introTitle}</h2>
+        <p class="blog-intro-copy">{blog.intro}</p>
+      </div>
 
       {
         posts.length === 0 ? (
           <p class="body-copy mx-auto max-w-xl text-center">{blog.emptyState}</p>
         ) : (
           <>
-            <div class="blog-grid" data-blog-grid data-initial={initialCount}>
-              {posts.map((post, index) => (
-                <a
-                  href={withBase(`/blog/${post.slug}`)}
-                  class:list={['blog-card', 'reveal', index >= initialCount && 'is-hidden']}
-                  data-reveal
-                  data-blog-card
-                  style={`--reveal-delay: ${(index % initialCount) * 70}ms`}
-                >
-                  <div class="blog-card-media">
-                    <img
-                      src={post.coverImage || blog.defaultCoverImage}
-                      alt=""
-                    />
-                    <span class="blog-card-date">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                      >
-                        <rect x="3" y="5" width="18" height="16" rx="2" />
-                        <path d="M3 10h18M8 3v4M16 3v4" />
-                      </svg>
-                      {formatBlogCardDate(post.publishedDate)}
-                    </span>
+            {featured && (
+              <a
+                href={withBase(`/blog/${featured.slug}`)}
+                class="blog-featured reveal"
+                data-reveal
+              >
+                <div class="blog-featured-media">
+                  <img
+                    src={featured.coverImage || blog.defaultCoverImage}
+                    alt=""
+                  />
+                </div>
+                <div class="blog-featured-copy">
+                  <p class="section-kicker">Featured</p>
+                  <h2 class="blog-featured-title">{featured.title}</h2>
+                  <p class="blog-featured-excerpt">{featured.excerpt}</p>
+                  <div class="blog-featured-meta">
+                    <span>{formatBlogCardDate(featured.publishedDate)}</span>
+                    <span class="blog-featured-dot" aria-hidden="true" />
+                    <span>{featured.author}</span>
                   </div>
-                  <div class="blog-card-footer">
-                    <h2 class="blog-card-title">{post.title}</h2>
-                    <span class="blog-card-arrow" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-              ))}
-            </div>
+                  <span class="blog-featured-cta">
+                    Read article
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            )}
 
-            {posts.length > initialCount && (
-              <div class="blog-load-more">
-                <button type="button" class="btn btn-primary" data-blog-load-more>
-                  {blog.loadMoreLabel}
-                </button>
-              </div>
+            {rest.length > 0 && (
+              <>
+                <div class="blog-latest-header reveal" data-reveal>
+                  <p class="section-kicker">Latest</p>
+                  <h3 class="blog-latest-title">More from the library</h3>
+                </div>
+
+                <div class="blog-grid" data-blog-grid data-initial={initialCount}>
+                  {rest.map((post, index) => (
+                    <a
+                      href={withBase(`/blog/${post.slug}`)}
+                      class:list={['blog-card', 'reveal', index >= initialCount && 'is-hidden']}
+                      data-reveal
+                      data-blog-card
+                      style={`--reveal-delay: ${(index % initialCount) * 70}ms`}
+                    >
+                      <div class="blog-card-media">
+                        <img
+                          src={post.coverImage || blog.defaultCoverImage}
+                          alt=""
+                        />
+                      </div>
+                      <div class="blog-card-body">
+                        <p class="blog-card-meta">
+                          <span>{formatBlogCardDate(post.publishedDate)}</span>
+                          <span class="blog-card-meta-dot" aria-hidden="true" />
+                          <span>{post.author}</span>
+                        </p>
+                        <h2 class="blog-card-title">{post.title}</h2>
+                        <p class="blog-card-excerpt">{post.excerpt}</p>
+                        <span class="blog-card-link">
+                          Read more
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                          </svg>
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                {rest.length > initialCount && (
+                  <div class="blog-load-more">
+                    <button type="button" class="btn btn-primary" data-blog-load-more>
+                      {blog.loadMoreLabel}
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </>
         )
@@ -90,11 +119,11 @@ const initialCount = 4;
     </div>
   </section>
 
-  <AboutCta
+  <CtaBand
     title={cta.title}
+    description=""
+    eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl}
-    points={cta.points}
-    imageUrl={cta.imageUrl}
+    primaryUrl={site.signInUrl || withBase('/contact-us')}
   />
 </SiteLayout>

@@ -21,12 +21,6 @@ const initialCount = 4;
 
   <section class="section section-light blog-page">
     <div class="container-site">
-      <div class="blog-intro reveal" data-reveal>
-        <p class="section-kicker">Insights</p>
-        <h2 class="blog-intro-title">{blog.introTitle}</h2>
-        <p class="blog-intro-copy">{blog.intro}</p>
-      </div>
-
       {
         posts.length === 0 ? (
           <p class="body-copy mx-auto max-w-xl text-center">{blog.emptyState}</p>

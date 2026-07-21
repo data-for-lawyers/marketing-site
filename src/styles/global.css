@@ -1977,6 +1977,28 @@
     color: var(--color-ink);
   }
 
+  .legal-prose .legal-section + .legal-section {
+    margin-top: 2.5rem;
+  }
+
+  .legal-prose .legal-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .legal-prose .legal-list li {
+    margin-bottom: 0.85rem;
+    padding-left: 0;
+  }
+
+  .legal-prose h3 {
+    margin-top: 2.25rem;
+  }
+
+  .legal-prose h3:first-of-type {
+    margin-top: 1.5rem;
+  }
+
   /* —— Motion —— */
   .reveal {
     opacity: 0;

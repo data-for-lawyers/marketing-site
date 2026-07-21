@@ -3,11 +3,17 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { getTermsContent } from '../../lib/content';
+import { parseLegalBody } from '../../lib/legal';
 import { notFoundIfDisabled } from '../../lib/pages';
 
 const { site, terms } = await getTermsContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/terms-of-service');
 if (disabled) return disabled;
+
+const sections = terms.sections.map((section) => ({
+  title: section.title,
+  blocks: parseLegalBody(section.body),
+}));
 ---
 
 <SiteLayout title={terms.title} description={terms.description}>
@@ -17,13 +23,25 @@ if (disabled) return disabled;
     <div class="container-site">
       <PageIntro title={terms.introTitle} description={terms.intro} />
 
-      <div class="prose mx-auto max-w-3xl rounded-[1.5rem] border border-[var(--color-border)] bg-white p-8 md:p-12">
+      <div class="prose legal-prose mx-auto max-w-3xl rounded-[1.5rem] border border-[var(--color-border)] bg-white p-8 md:p-12">
         {
-          terms.sections.map((section) => (
-            <>
+          sections.map((section) => (
+            <section class="legal-section">
               <h2>{section.title}</h2>
-              <p>{section.body}</p>
-            </>
+              {section.blocks.map((block) => {
+                if (block.type === 'heading') return <h3>{block.text}</h3>;
+                if (block.type === 'list') {
+                  return (
+                    <ul class="legal-list">
+                      {block.items.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+                return <p>{block.text}</p>;
+              })}
+            </section>
           ))
         }
         <p>

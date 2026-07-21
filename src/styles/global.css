@@ -490,6 +490,12 @@
     font-size: 0.85rem;
   }
 
+  .carriers-kicker {
+    margin: 0 auto 1.25rem;
+    text-align: center;
+    width: fit-content;
+  }
+
   /* —— Logo cloud carousel —— */
   .logo-cloud {
     display: grid;
@@ -606,7 +612,8 @@
     margin-bottom: 2rem;
   }
 
-  .capability-kicker {
+  .capability-kicker,
+  .section-kicker {
     margin: 0 0 0.75rem;
     font-family: var(--font-sans);
     font-size: 0.8rem;
@@ -614,6 +621,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-orange);
+  }
+
+  .section-kicker.is-light {
+    color: var(--color-lime-soft);
   }
 
   .capability-title {
@@ -1308,11 +1319,11 @@
   .testimonials-eyebrow {
     margin: 0 0 1.75rem;
     font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-orange);
   }
 
   .testimonials-frame {
@@ -1529,6 +1540,10 @@
     }
   }
 
+  .faq-kicker {
+    margin: 0 0 0.75rem;
+  }
+
   .faq-title {
     font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 600;
@@ -1677,6 +1692,10 @@
   }
 
   /* —— CTA —— */
+  .cta-kicker {
+    margin: 0 0 0.85rem;
+  }
+
   .cta-band {
     background: var(--color-forest);
     color: var(--color-white);

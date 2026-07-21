@@ -2,18 +2,20 @@
 interface Props {
   title: string;
   description: string;
+  eyebrow?: string;
   primaryLabel: string;
   primaryUrl: string;
   secondaryLabel?: string;
   secondaryUrl?: string;
 }
 
-const { title, description, primaryLabel, primaryUrl } = Astro.props;
+const { title, description, eyebrow = 'Get Started', primaryLabel, primaryUrl } = Astro.props;
 ---
 
 <section class="section section-light">
   <div class="container-site">
     <div class="cta-band reveal" data-reveal>
+      <p class="section-kicker is-light cta-kicker">{eyebrow}</p>
       <h2 class="mx-auto max-w-3xl">{title}</h2>
       {
         description && (

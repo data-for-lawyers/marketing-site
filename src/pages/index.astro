@@ -36,17 +36,19 @@ const cta = getSharedCta(site);
       imageUrl={homepage.heroImage}
     />
 
-    <StatsSection carriers={homepage.carriers} />
+    <StatsSection carriers={homepage.carriers} eyebrow={homepage.carriersEyebrow} />
 
     <Services
       title={homepage.servicesTitle}
       description={homepage.servicesDescription}
+      eyebrow={homepage.servicesEyebrow}
       services={homepage.services}
     />
 
     <Comparison
       title={homepage.comparisonTitle}
       description={homepage.comparisonDescription}
+      eyebrow={homepage.comparisonEyebrow}
       other={homepage.comparisonOther}
       ours={homepage.comparisonOurs}
     />
@@ -54,12 +56,14 @@ const cta = getSharedCta(site);
     <Testimonials
       title={homepage.testimonialsTitle}
       description={homepage.testimonialsDescription}
+      eyebrow={homepage.testimonialsEyebrow}
       items={homepage.testimonials}
     />
 
     <FAQ
       title={homepage.faqTitle}
       description={homepage.faqDescription}
+      eyebrow={homepage.faqEyebrow}
       items={homepage.faqs}
       showAllLink={site.pagesEnabled.faqs}
       browseAllLabel={homepage.faqBrowseAllLabel}
@@ -68,6 +72,7 @@ const cta = getSharedCta(site);
     <CtaBand
       title={cta.title}
       description={homepage.ctaDescription}
+      eyebrow={homepage.ctaEyebrow}
       primaryLabel={cta.primaryLabel}
       primaryUrl={site.signInUrl}
     />

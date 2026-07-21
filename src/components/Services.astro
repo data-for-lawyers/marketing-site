@@ -11,10 +11,11 @@ type Service = {
 interface Props {
   title: string;
   description?: string;
+  eyebrow?: string;
   services: readonly Service[];
 }
 
-const { title, description, services } = Astro.props;
+const { title, description, eyebrow = 'Capabilities', services } = Astro.props;
 const items = services.filter((service) => service.image).slice(0, 5);
 ---
 
@@ -23,7 +24,7 @@ const items = services.filter((service) => service.image).slice(0, 5);
     <section id="platform" class="section capability-section">
       <div class="capability-intro reveal" data-reveal>
         <div class="container-site">
-          <p class="capability-kicker">Capabilities</p>
+          <p class="section-kicker capability-kicker">{eyebrow}</p>
           <h2 class="capability-title">{title}</h2>
           {description && <p class="capability-copy">{description}</p>}
         </div>

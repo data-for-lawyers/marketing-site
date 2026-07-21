@@ -8,16 +8,18 @@ type Column = {
 interface Props {
   title: string;
   description: string;
+  eyebrow?: string;
   other: Column;
   ours: Column;
 }
 
-const { title, description, other, ours } = Astro.props;
+const { title, description, eyebrow = 'Why Us', other, ours } = Astro.props;
 ---
 
 <section id="why-us" class="section compare-section">
   <div class="container-site section-stack">
     <div class="compare-intro reveal" data-reveal>
+      <p class="section-kicker is-light">{eyebrow}</p>
       <h2 class="compare-heading">{title}</h2>
       <p class="compare-lead">{description}</p>
     </div>

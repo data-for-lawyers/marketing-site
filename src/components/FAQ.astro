@@ -9,6 +9,7 @@ type FaqItem = {
 interface Props {
   title: string;
   description?: string;
+  eyebrow?: string;
   items: readonly FaqItem[];
   showAllLink?: boolean;
   browseAllLabel?: string;
@@ -17,6 +18,7 @@ interface Props {
 const {
   title,
   description = 'Find clear and concise answers to common questions about our process, services, and how we support legal teams.',
+  eyebrow = 'FAQ',
   items,
   showAllLink = false,
   browseAllLabel = 'Browse all FAQs →',
@@ -26,6 +28,7 @@ const {
 <section id="faq" class="section section-light faq-section">
   <div class="container-site faq-layout">
     <div class="faq-intro reveal is-visible" data-reveal>
+      <p class="section-kicker faq-kicker">{eyebrow}</p>
       <h2 class="faq-title">{title}</h2>
       <p class="faq-description">{description}</p>
       {

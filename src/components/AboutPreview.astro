@@ -1,15 +1,16 @@
 ---
 import SectionHeader from './SectionHeader.astro';
+import { withBase } from '../lib/paths';
 
 interface Props {
   eyebrow: string;
   title: string;
   description: string;
   ctaLabel: string;
-  ctaUrl: string;
+  ctaUrl?: string;
 }
 
-const { eyebrow, title, description, ctaLabel, ctaUrl } = Astro.props;
+const { eyebrow, title, description, ctaLabel, ctaUrl = withBase('/contact-us') } = Astro.props;
 ---
 
 <section id="about" class="section section-light">

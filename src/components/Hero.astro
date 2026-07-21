@@ -1,13 +1,16 @@
 ---
+import { withBase } from '../lib/paths';
+
 interface Props {
   title: string;
   subtitle: string;
   ctaLabel: string;
-  ctaUrl: string;
+  ctaUrl?: string;
   imageUrl: string;
 }
 
-const { title, subtitle, ctaLabel, ctaUrl, imageUrl } = Astro.props;
+const { title, subtitle, ctaLabel, imageUrl } = Astro.props;
+const ctaUrl = withBase('/contact-us');
 ---
 
 <section class="hero-shell">

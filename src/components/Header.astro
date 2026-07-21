@@ -23,7 +23,7 @@ const {
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links = navLinks.length ? navLinks : defaultNavLinks;
 const homeHref = withBase('/');
-const resolvedCtaUrl = withBase(ctaUrl);
+const resolvedCtaUrl = withBase('/contact-us');
 const resolvedSignInUrl = withBase(signInUrl);
 ---
 

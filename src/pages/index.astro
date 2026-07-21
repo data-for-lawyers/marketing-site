@@ -21,7 +21,7 @@ const cta = getSharedCta(site);
     logoUrl={site.logoLightUrl || site.logoUrl}
     phone={site.phone}
     ctaLabel={site.headerCtaLabel}
-    ctaUrl={site.headerCtaUrl}
+    ctaUrl="/contact-us"
     signInUrl={site.signInUrl}
     signInLabel={site.signInLabel}
     navLinks={site.navLinks}
@@ -32,7 +32,7 @@ const cta = getSharedCta(site);
       title={homepage.heroTitle}
       subtitle={homepage.heroSubtitle}
       ctaLabel={homepage.heroCta}
-      ctaUrl={withBase(homepage.heroCtaUrl || site.headerCtaUrl)}
+      ctaUrl={withBase('/contact-us')}
       imageUrl={homepage.heroImage}
     />
 

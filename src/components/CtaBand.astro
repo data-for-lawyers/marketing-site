@@ -19,11 +19,12 @@ const {
   description = '',
   eyebrow = 'Get Started',
   primaryLabel,
-  primaryUrl = withBase('/contact-us'),
   secondaryLabel,
   secondaryUrl,
   points = [],
 } = Astro.props;
+
+const primaryUrl = withBase('/contact-us');
 ---
 
 <section class="section section-light cta-section">

@@ -35,7 +35,17 @@ if (!post) {
 <SiteLayout title={post.title} description={post.excerpt}>
   <PageHero eyebrow={blog.eyebrow || blog.title} title={post.title} />
 
-  <article class="section section-light">
+  {
+    post.coverImage && (
+      <section class="blog-post-cover-section">
+        <div class="blog-post-cover reveal" data-reveal>
+          <img src={post.coverImage} alt="" />
+        </div>
+      </section>
+    )
+  }
+
+  <article class="section section-light blog-post-body">
     <div class="container-site">
       <a href={withBase('/blog')} class="text-link">{blog.backLabel}</a>
 
@@ -45,16 +55,6 @@ if (!post) {
         </p>
         <p class="section-copy mt-4">{post.excerpt}</p>
       </header>
-
-      {
-        post.coverImage && (
-          <img
-            src={post.coverImage}
-            alt=""
-            class="media-cover media-16-10 mt-10 w-full max-w-4xl"
-          />
-        )
-      }
 
       <div class="prose mt-10 max-w-3xl" set:html={post.html} />
     </div>

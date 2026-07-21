@@ -1,6 +1,7 @@
 title: Services
 eyebrow: Services
 subtitle: Records Retrieval. Simplified.
+introEyebrow: Overview
 introTitle: Records retrieval, simplified
 intro: >-
   Data for Lawyers supports the preparation and management of mobile carrier and
@@ -10,8 +11,17 @@ intro: >-
   organize requests, track progress, and manage records efficiently from start
   to finish.
 introImage: /images/services/overview.jpg
+platformEyebrow: Platform
+platformTitle: From request to authenticated delivery
+platformDescription: >-
+  One workflow that keeps every records request organized, visible, and ready
+  for legal review.
+pathwaysEyebrow: Pathways
+pathwaysTitle: Choose the process your jurisdiction requires
+pathwaysDescription: >-
+  Whether you need a subpoena or a DWQ, Data for Lawyers helps you prepare,
+  track, and manage the request end to end.
 offeringsLabel: Data for Lawyers helps you
-loadMoreLabel: Load More
 features:
   - title: Prepare Requests
     description: Create organized, complete requests using standardized workflows.
@@ -56,6 +66,7 @@ offerings:
       - Organize supporting documentation
       - Manage request timelines
       - Maintain a centralized record of each request
+ctaEyebrow: Get Started
 ctaTitle: Ready to Simplify Records Retrieval?
 ctaDescription: >-
   See how Data for Lawyers helps legal professionals streamline records requests

@@ -4,7 +4,8 @@ description: >-
   Tell us about your records workflow and we will help you take the next step.
 sectionEyebrow: Get in touch
 formTitle: Tell us about your records workflow
-sideCtaLabel: Book a demo
+formPanelEyebrow: Message
+formPanelTitle: Send us a note
 formSubmitLabel: Submit
 namePlaceholder: Name
 phonePlaceholder: Phone

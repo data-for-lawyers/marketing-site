@@ -3,5 +3,4 @@ export type SharedCta = {
   title: string;
   primaryLabel: string;
   points: readonly string[];
-  imageUrl?: string;
 };

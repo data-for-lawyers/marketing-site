@@ -7,13 +7,11 @@ type Testimonial = {
 };
 
 interface Props {
-  title: string;
-  description: string;
   eyebrow?: string;
   items: readonly Testimonial[];
 }
 
-const { eyebrow = 'Testimonials', description, items } = Astro.props;
+const { eyebrow = 'Testimonials', items } = Astro.props;
 
 function initials(name: string) {
   return name
@@ -35,7 +33,7 @@ function initials(name: string) {
           data-testimonials
         >
           <p class="section-kicker testimonials-eyebrow">
-            {eyebrow || description || 'Testimonials'}
+            {eyebrow || 'Testimonials'}
           </p>
 
           <div class="testimonials-frame">

@@ -10,7 +10,6 @@ import FAQ from '../components/FAQ.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Footer from '../components/Footer.astro';
 import { getSharedCta, getSiteContent } from '../lib/content';
-import { withBase } from '../lib/paths';
 
 const { site, homepage } = await getSiteContent();
 const cta = getSharedCta(site);
@@ -32,7 +31,7 @@ const cta = getSharedCta(site);
       title={homepage.heroTitle}
       subtitle={homepage.heroSubtitle}
       ctaLabel={homepage.heroCta}
-      ctaUrl={withBase('/contact-us')}
+      secondaryCtaLabel={homepage.heroSecondaryCta}
       platformUrl={site.signInUrl}
       imageUrl={homepage.heroImage}
     />
@@ -43,6 +42,8 @@ const cta = getSharedCta(site);
       title={homepage.servicesTitle}
       description={homepage.servicesDescription}
       eyebrow={homepage.servicesEyebrow}
+      hint={homepage.servicesHint}
+      ctaLabel={homepage.servicesCtaLabel}
       services={homepage.services}
     />
 
@@ -55,8 +56,6 @@ const cta = getSharedCta(site);
     />
 
     <Testimonials
-      title={homepage.testimonialsTitle}
-      description={homepage.testimonialsDescription}
       eyebrow={homepage.testimonialsEyebrow}
       items={homepage.testimonials}
     />
@@ -85,11 +84,11 @@ const cta = getSharedCta(site);
     phone={site.phone}
     email={site.email}
     linkedInUrl={site.linkedInUrl}
-    demoUrl={site.demoUrl}
     signInUrl={site.signInUrl}
     logoUrl={site.logoLightUrl}
     demoCtaLabel={site.demoCtaLabel}
     signInLabel={site.signInLabel}
+    termsLabel={site.termsLabel}
     companyHeading={site.footerCompanyHeading}
     resourcesHeading={site.footerResourcesHeading}
     getStartedHeading={site.footerGetStartedHeading}

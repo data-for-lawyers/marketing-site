@@ -9,11 +9,11 @@ interface Props {
   phone: string;
   email: string;
   linkedInUrl: string;
-  demoUrl: string;
   signInUrl: string;
   logoUrl: string;
   demoCtaLabel?: string;
   signInLabel?: string;
+  termsLabel?: string;
   companyHeading?: string;
   resourcesHeading?: string;
   getStartedHeading?: string;
@@ -28,11 +28,11 @@ const {
   phone,
   email,
   linkedInUrl,
-  demoUrl,
   signInUrl,
   logoUrl,
   demoCtaLabel = 'Book a demo',
   signInLabel = 'Log in',
+  termsLabel = 'Master Service Agreement',
   companyHeading = 'Company',
   resourcesHeading = 'Resources',
   getStartedHeading = 'Get started',
@@ -61,7 +61,7 @@ const resourceLinks = [
     ? [{ href: withBase('/privacy-policy'), label: 'Privacy Policy' }]
     : []),
   ...(isPageEnabled(pagesEnabled, '/terms-of-service')
-    ? [{ href: withBase('/terms-of-service'), label: 'Master Service Agreement' }]
+    ? [{ href: withBase('/terms-of-service'), label: termsLabel }]
     : []),
   { href: linkedInUrl, label: 'LinkedIn', external: true as const },
 ];

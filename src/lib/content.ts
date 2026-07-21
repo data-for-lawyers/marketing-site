@@ -1,6 +1,6 @@
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
-import { resolveCmsImage, resolveCmsImages } from './images';
+import { resolveCmsImage } from './images';
 import { getVisibleNavLinks } from './nav';
 import { DEFAULT_PAGES_ENABLED } from './pages';
 
@@ -24,7 +24,6 @@ function normalizeSite(site: NonNullable<Awaited<ReturnType<typeof reader.single
     pagesEnabled,
     logoUrl: resolveCmsImage(site.logoUrl, '/images/site/'),
     logoLightUrl: resolveCmsImage(site.logoLightUrl, '/images/site/'),
-    ctaImageUrl: resolveCmsImage(site.ctaImageUrl, '/images/site/'),
     navLinks: getVisibleNavLinks(site.navLinks, pagesEnabled),
   };
 }
@@ -35,7 +34,6 @@ function normalizeHomepage(
   return {
     ...homepage,
     heroImage: resolveCmsImage(homepage.heroImage, '/images/homepage/'),
-    heroAvatars: resolveCmsImages(homepage.heroAvatars, '/images/homepage/avatars/'),
     services: homepage.services.map((service) => ({
       ...service,
       image: resolveCmsImage(service.image, '/images/homepage/services/'),
@@ -149,6 +147,5 @@ export function getSharedCta(site: Awaited<ReturnType<typeof getSite>>) {
     title: site.ctaTitle,
     primaryLabel: site.ctaPrimaryLabel,
     points: site.ctaPoints,
-    imageUrl: site.ctaImageUrl,
   };
 }

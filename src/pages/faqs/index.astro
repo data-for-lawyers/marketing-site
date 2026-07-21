@@ -37,7 +37,7 @@ const cta = getSharedCta(site);
 
   <CtaBand
     title={cta.title}
-    eyebrow="Get Started"
+    eyebrow={faqs.ctaEyebrow || 'Get Started'}
     primaryLabel={cta.primaryLabel}
     points={cta.points}
   />

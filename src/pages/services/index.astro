@@ -19,7 +19,7 @@ const features = services.features;
     <div class="container-site">
       <div class="svc-intro-layout reveal" data-reveal>
         <div class="svc-intro">
-          <p class="section-kicker">Overview</p>
+          <p class="section-kicker">{services.introEyebrow || 'Overview'}</p>
           <h2 class="svc-intro-title">{services.introTitle}</h2>
           <p class="svc-intro-copy">{services.intro}</p>
         </div>
@@ -39,11 +39,9 @@ const features = services.features;
       <section class="section svc-steps-section">
         <div class="container-site">
           <div class="svc-steps-intro reveal" data-reveal>
-            <p class="section-kicker">Platform</p>
-            <h2 class="svc-steps-title">From request to authenticated delivery</h2>
-            <p class="svc-steps-lead">
-              One workflow that keeps every records request organized, visible, and ready for legal review.
-            </p>
+            <p class="section-kicker">{services.platformEyebrow || 'Platform'}</p>
+            <h2 class="svc-steps-title">{services.platformTitle}</h2>
+            <p class="svc-steps-lead">{services.platformDescription}</p>
           </div>
 
           <ol class="svc-steps">
@@ -78,11 +76,9 @@ const features = services.features;
   <section id="offerings" class="section svc-pathways-section">
     <div class="container-site">
       <div class="svc-pathways-intro is-center reveal" data-reveal>
-        <p class="section-kicker is-light">Pathways</p>
-        <h2 class="svc-pathways-title">Choose the process your jurisdiction requires</h2>
-        <p class="svc-pathways-lead">
-          Whether you need a subpoena or a DWQ, Data for Lawyers helps you prepare, track, and manage the request end to end.
-        </p>
+        <p class="section-kicker is-light">{services.pathwaysEyebrow || 'Pathways'}</p>
+        <h2 class="svc-pathways-title">{services.pathwaysTitle}</h2>
+        <p class="svc-pathways-lead">{services.pathwaysDescription}</p>
       </div>
 
       <div class="svc-pathway-list">
@@ -125,7 +121,7 @@ const features = services.features;
   <CtaBand
     title={services.ctaTitle || cta.title}
     description={services.ctaDescription || ''}
-    eyebrow="Get Started"
+    eyebrow={services.ctaEyebrow || 'Get Started'}
     primaryLabel={cta.primaryLabel}
     points={cta.points}
   />

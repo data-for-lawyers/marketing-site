@@ -6,11 +6,19 @@ interface Props {
   subtitle: string;
   ctaLabel: string;
   ctaUrl?: string;
+  secondaryCtaLabel?: string;
   platformUrl?: string;
   imageUrl: string;
 }
 
-const { title, subtitle, ctaLabel, imageUrl, platformUrl } = Astro.props;
+const {
+  title,
+  subtitle,
+  ctaLabel,
+  imageUrl,
+  platformUrl,
+  secondaryCtaLabel = 'See the platform',
+} = Astro.props;
 const ctaUrl = withBase('/contact-us');
 const resolvedPlatformUrl = platformUrl
   ? withBase(platformUrl)
@@ -31,7 +39,7 @@ const resolvedPlatformUrl = platformUrl
       <div class="hero-actions">
         <a href={ctaUrl} class="btn btn-primary">{ctaLabel}</a>
         <a href={resolvedPlatformUrl} class="hero-secondary">
-          See the platform
+          {secondaryCtaLabel}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M7 17L17 7M9 7h8v8" />
           </svg>

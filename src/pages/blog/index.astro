@@ -39,7 +39,7 @@ const initialCount = 4;
                   />
                 </div>
                 <div class="blog-featured-copy">
-                  <p class="section-kicker">Featured</p>
+                  <p class="section-kicker">{blog.featuredLabel || 'Featured'}</p>
                   <h2 class="blog-featured-title">{featured.title}</h2>
                   <p class="blog-featured-excerpt">{featured.excerpt}</p>
                   <div class="blog-featured-meta">
@@ -48,7 +48,7 @@ const initialCount = 4;
                     <span>{featured.author}</span>
                   </div>
                   <span class="blog-featured-cta">
-                    Read article
+                    {blog.featuredCtaLabel || 'Read article'}
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="M7 17L17 7M9 7h8v8" />
                     </svg>
@@ -60,8 +60,8 @@ const initialCount = 4;
             {rest.length > 0 && (
               <>
                 <div class="blog-latest-header reveal" data-reveal>
-                  <p class="section-kicker">Latest</p>
-                  <h3 class="blog-latest-title">More from the library</h3>
+                  <p class="section-kicker">{blog.latestEyebrow || 'Latest'}</p>
+                  <h3 class="blog-latest-title">{blog.latestTitle || 'More from the library'}</h3>
                 </div>
 
                 <div class="blog-grid" data-blog-grid data-initial={initialCount}>
@@ -88,7 +88,7 @@ const initialCount = 4;
                         <h2 class="blog-card-title">{post.title}</h2>
                         <p class="blog-card-excerpt">{post.excerpt}</p>
                         <span class="blog-card-link">
-                          Read more
+                          {blog.readMoreLabel || 'Read more'}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M5 12h14M13 6l6 6-6 6" />
                           </svg>
@@ -115,7 +115,7 @@ const initialCount = 4;
 
   <CtaBand
     title={cta.title}
-    eyebrow="Get Started"
+    eyebrow={blog.ctaEyebrow || 'Get Started'}
     primaryLabel={cta.primaryLabel}
     points={cta.points}
   />

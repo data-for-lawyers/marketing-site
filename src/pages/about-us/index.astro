@@ -9,10 +9,6 @@ const { site, about } = await getAboutContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/about-us');
 if (disabled) return disabled;
 const cta = getSharedCta(site);
-
-const expertise = about.sections.find((s) => s.title === 'Our Expertise') ?? about.sections[1];
-const commitment =
-  about.sections.find((s) => s.title === 'Our Commitment') ?? about.sections[2];
 ---
 
 <SiteLayout title={about.title} description={about.intro}>
@@ -31,7 +27,7 @@ const commitment =
   <section class="section section-light about-intro-section">
     <div class="container-site">
       <div class="about-intro reveal" data-reveal>
-        <p class="section-kicker">Overview</p>
+        <p class="section-kicker">{about.introEyebrow || 'Overview'}</p>
         <h2 class="about-intro-title">{about.introTitle}</h2>
         <p class="about-intro-copy">{about.intro}</p>
       </div>
@@ -41,13 +37,13 @@ const commitment =
   <section class="section section-light about-split-section">
     <div class="container-site">
       <div class="about-split reveal" data-reveal>
-        <div class="about-split-media">
-          <img src={about.missionImage} alt="" />
-        </div>
         <div class="about-split-copy">
           <p class="section-kicker">{about.missionLabel}</p>
           <h2>{about.missionTitle}</h2>
-          <p class="about-split-desc">{expertise?.body}</p>
+          <p class="about-split-desc">{about.missionBody}</p>
+        </div>
+        <div class="about-split-media">
+          <img src={about.missionImage} alt="" />
         </div>
       </div>
     </div>
@@ -59,7 +55,7 @@ const commitment =
         <div class="about-split-copy">
           <p class="section-kicker">{about.visionLabel}</p>
           <h2>{about.visionTitle}</h2>
-          <p class="about-split-desc">{commitment?.body}</p>
+          <p class="about-split-desc">{about.visionBody}</p>
         </div>
         <div class="about-split-media">
           <img src={about.visionImage} alt="" />
@@ -71,7 +67,7 @@ const commitment =
   <CtaBand
     title={about.ctaTitle || cta.title}
     description={about.ctaDescription || ''}
-    eyebrow="Get Started"
+    eyebrow={about.ctaEyebrow || 'Get Started'}
     primaryLabel={cta.primaryLabel}
     points={cta.points}
   />

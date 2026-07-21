@@ -7,6 +7,8 @@ interface Props {
   ctaUrl: string;
   phone: string;
   email: string;
+  formEyebrow?: string;
+  formTitle?: string;
   submitLabel?: string;
   namePlaceholder?: string;
   phonePlaceholder?: string;
@@ -22,6 +24,8 @@ const {
   ctaUrl,
   phone,
   email,
+  formEyebrow = 'Message',
+  formTitle = 'Send us a note',
   submitLabel = 'Send Message',
   namePlaceholder = 'Name',
   phonePlaceholder = 'Phone',
@@ -60,8 +64,8 @@ const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
       </div>
 
       <form class="contact-form" action="#" method="post">
-        <p class="section-kicker">Message</p>
-        <h3 class="contact-form-title">Send us a note</h3>
+        <p class="section-kicker">{formEyebrow}</p>
+        <h3 class="contact-form-title">{formTitle}</h3>
         <div class="contact-form-fields">
           <label class="contact-field">
             <span class="contact-field-label">Name</span>

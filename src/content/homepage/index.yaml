@@ -4,36 +4,18 @@ heroSubtitle: >-
   carrier and third-party records through one secure, organized platform.
 heroImage: /images/homepage/hero.jpg
 heroCta: Get in touch
-heroCtaUrl: /contact-us
-heroTrustCount: 10k+
-heroTrustCopy: Trusted by legal teams nationwide for authenticated records delivery.
-heroFloatLabel: Weekly Performance
-heroFloatMeta: +18% This Week
-heroAvatars:
-  - /images/homepage/avatars/avatar-1.jpg
-  - /images/homepage/avatars/avatar-2.jpg
-  - /images/homepage/avatars/avatar-3.jpg
+heroSecondaryCta: See the platform
 servicesTitle: A Better Way to Retrieve Records
 servicesDescription: >-
   Scroll through the capabilities that help legal teams move from request to
   authenticated delivery — without the usual chaos.
-carriersEyebrow: Coverage
 servicesEyebrow: Capabilities
+servicesHint: Drag or scroll to explore
+servicesCtaLabel: Explore all services
 comparisonEyebrow: Why Us
 testimonialsEyebrow: Testimonials
 faqEyebrow: FAQ
 ctaEyebrow: Get Started
-whyEyebrow: How it works
-whyTitle: How It Works
-whyDescription: From secure submission to authenticated delivery — four steps, no guesswork.
-whyCtaLabel: Get started
-aboutEyebrow: About Us
-aboutTitle: About Data for Lawyers
-aboutDescription: >-
-  Data for Lawyers helps legal professionals prepare, track, and receive
-  authenticated mobile carrier and third-party records through one secure
-  platform.
-aboutCta: Learn More About Us
 comparisonTitle: Why Legal Teams Choose Us Over Manual Processes
 comparisonDescription: >-
   We focus on delivering tailored records workflows, clear communication, and
@@ -60,8 +42,6 @@ comparisonOurs:
     - Authenticated, organized delivery
     - Carrier coverage in one place
     - Dedicated expert support
-testimonialsTitle: Real Results That Drive Case Progress
-testimonialsDescription: Hear from the decision makers themselves!
 faqTitle: Frequently Asked Questions About Services
 faqDescription: >-
   Find clear and concise answers to common questions about our process,
@@ -70,12 +50,6 @@ faqBrowseAllLabel: Browse all FAQs →
 ctaDescription: >-
   Schedule a consultation and see how Data for Lawyers simplifies authenticated
   carrier and third-party records retrieval.
-contactEyebrow: Have Questions?
-contactTitle: Speak With Our Team
-contactDescription: >-
-  Speak with our team to learn how Data for Lawyers can simplify your records
-  retrieval workflow.
-contactCta: Schedule a Consultation
 services:
   - title: Efficient Request Management
     description: Submit requests in minutes through a secure online platform.
@@ -120,15 +94,6 @@ services:
       - Improve organization
       - Maintain documentation integrity
       - Deliver consistent results
-whyItems:
-  - title: Submit Request
-    description: Submit your request securely in minutes.
-  - title: We Process
-    description: We handle the request and communicate with carriers.
-  - title: We Verify
-    description: Records are authenticated and prepared with complete data.
-  - title: Receive Records
-    description: Receive organized, authenticated records ready for your case.
 carriers:
   - name: AT&T
     logo: /images/carriers/att.svg

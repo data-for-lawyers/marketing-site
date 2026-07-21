@@ -25,7 +25,7 @@ const pagesEnabled = fields.object(
     faqs: fields.checkbox({ label: 'FAQs', defaultValue: true }),
     contact: fields.checkbox({ label: 'Contact', defaultValue: true }),
     privacy: fields.checkbox({ label: 'Privacy Policy', defaultValue: true }),
-    terms: fields.checkbox({ label: 'Terms of Service', defaultValue: true }),
+    terms: fields.checkbox({ label: 'Master Service Agreement', defaultValue: true }),
   },
   { label: 'Published Pages' },
 );
@@ -34,29 +34,15 @@ const serviceItem = fields.object({
   title: fields.text({ label: 'Title' }),
   description: fields.text({ label: 'Description', multiline: true }),
   bullets: fields.array(bulletItem, {
-    label: 'Bullet Points',
-    itemLabel: (props) => props.value ?? 'Bullet',
+    label: 'Tags (shown on card)',
+    itemLabel: (props) => props.value ?? 'Tag',
   }),
   image: imageField('Image', 'homepage/services'),
-});
-
-const whyItem = fields.object({
-  title: fields.text({ label: 'Title' }),
-  description: fields.text({ label: 'Description', multiline: true }),
 });
 
 const faqItem = fields.object({
   question: fields.text({ label: 'Question' }),
   answer: fields.text({ label: 'Answer', multiline: true }),
-});
-
-const aboutSection = fields.object({
-  title: fields.text({ label: 'Title' }),
-  body: fields.text({ label: 'Body', multiline: true }),
-  bullets: fields.array(bulletItem, {
-    label: 'Bullet Points',
-    itemLabel: (props) => props.value ?? 'Bullet',
-  }),
 });
 
 const servicesFeature = fields.object({
@@ -98,7 +84,10 @@ const pricingPlan = fields.object({
   period: fields.text({ label: 'Period', defaultValue: '/month' }),
   badge: fields.text({ label: 'Badge (optional)' }),
   featured: fields.checkbox({ label: 'Featured plan', defaultValue: false }),
-  cta: fields.text({ label: 'CTA Label' }),
+  cta: fields.text({
+    label: 'CTA Label',
+    description: 'Button goes to the contact page.',
+  }),
   features: fields.array(bulletItem, {
     label: 'Features',
     itemLabel: (props) => props.value ?? 'Feature',
@@ -107,7 +96,12 @@ const pricingPlan = fields.object({
 
 const legalSection = fields.object({
   title: fields.text({ label: 'Heading' }),
-  body: fields.text({ label: 'Body', multiline: true }),
+  body: fields.text({
+    label: 'Body',
+    multiline: true,
+    description:
+      'Separate paragraphs with a blank line. Short lines without punctuation become subheadings. Lines starting with (a) or (i) become lists.',
+  }),
 });
 
 export default config({
@@ -125,7 +119,7 @@ export default config({
         publishedDate: fields.date({ label: 'Published Date' }),
         author: fields.text({ label: 'Author', defaultValue: 'Data for Lawyers' }),
         excerpt: fields.text({ label: 'Excerpt', multiline: true }),
-        coverImage: imageField('Cover Image', 'posts'),
+        coverImage: imageField('Cover Image (full-width on post page)', 'posts'),
         published: fields.checkbox({ label: 'Published', defaultValue: false }),
         content: fields.markdoc({
           label: 'Content',
@@ -148,17 +142,28 @@ export default config({
         tagline: fields.text({ label: 'Tagline', multiline: true }),
         phone: fields.text({ label: 'Phone' }),
         email: fields.text({ label: 'Email' }),
-        demoUrl: fields.url({ label: 'Demo URL' }),
-        signInUrl: fields.url({ label: 'Sign In URL' }),
+        signInUrl: fields.url({
+          label: 'Sign In / Platform URL',
+          description: 'Used for Log in and “See the platform”.',
+        }),
         logoUrl: imageField('Logo', 'site'),
         logoLightUrl: imageField('Light Logo', 'site'),
-        privacyUrl: fields.url({ label: 'Privacy Policy URL' }),
-        termsUrl: fields.url({ label: 'Terms URL' }),
         linkedInUrl: fields.url({ label: 'LinkedIn URL' }),
-        headerCtaLabel: fields.text({ label: 'Header CTA Label', defaultValue: 'Get in touch' }),
-        headerCtaUrl: fields.text({ label: 'Header CTA URL', defaultValue: '/contact-us' }),
+        headerCtaLabel: fields.text({
+          label: 'Header CTA Label',
+          defaultValue: 'Get in touch',
+          description: 'Button goes to the contact page.',
+        }),
         signInLabel: fields.text({ label: 'Sign In Label', defaultValue: 'Log in' }),
-        demoCtaLabel: fields.text({ label: 'Demo CTA Label', defaultValue: 'Book a demo' }),
+        demoCtaLabel: fields.text({
+          label: 'Footer Contact CTA Label',
+          defaultValue: 'Book a demo',
+          description: 'Footer “Get started” link to the contact page.',
+        }),
+        termsLabel: fields.text({
+          label: 'Footer MSA Label',
+          defaultValue: 'Master Service Agreement',
+        }),
         footerCompanyHeading: fields.text({ label: 'Footer Company Heading', defaultValue: 'Company' }),
         footerResourcesHeading: fields.text({
           label: 'Footer Resources Heading',
@@ -173,8 +178,11 @@ export default config({
           defaultValue: 'All rights reserved.',
         }),
         ctaTitle: fields.text({ label: 'Shared CTA Title' }),
-        ctaPrimaryLabel: fields.text({ label: 'Shared CTA Button Label', defaultValue: 'Get started' }),
-        ctaImageUrl: imageField('Shared CTA Image', 'site'),
+        ctaPrimaryLabel: fields.text({
+          label: 'Shared CTA Button Label',
+          defaultValue: 'Get started',
+          description: 'Button goes to the contact page.',
+        }),
         ctaPoints: fields.array(bulletItem, {
           label: 'Shared CTA Points',
           itemLabel: (props) => props.value ?? 'Point',
@@ -193,58 +201,46 @@ export default config({
         heroTitle: fields.text({ label: 'Hero Title', multiline: true }),
         heroSubtitle: fields.text({ label: 'Hero Subtitle', multiline: true }),
         heroImage: imageField('Hero Image', 'homepage'),
-        heroCta: fields.text({ label: 'Hero CTA Label' }),
-        heroCtaUrl: fields.text({ label: 'Hero CTA URL', defaultValue: '/contact-us' }),
-        heroTrustCount: fields.text({ label: 'Hero Trust Count', defaultValue: '10k+' }),
-        heroTrustCopy: fields.text({ label: 'Hero Trust Copy', multiline: true }),
-        heroFloatLabel: fields.text({ label: 'Hero Float Label' }),
-        heroFloatMeta: fields.text({ label: 'Hero Float Meta' }),
-        heroAvatars: fields.array(imageField('Avatar', 'homepage/avatars'), {
-          label: 'Hero Trust Avatars',
-          itemLabel: () => 'Avatar',
+        heroCta: fields.text({
+          label: 'Hero Primary CTA Label',
+          description: 'Button goes to the contact page.',
         }),
-        servicesTitle: fields.text({ label: 'Services Title' }),
-        servicesDescription: fields.text({ label: 'Services Description', multiline: true }),
-        carriersEyebrow: fields.text({ label: 'Carriers Eyebrow', defaultValue: 'Coverage' }),
-        servicesEyebrow: fields.text({ label: 'Services Eyebrow', defaultValue: 'Capabilities' }),
-        whyEyebrow: fields.text({ label: 'How It Works Eyebrow' }),
-        whyTitle: fields.text({ label: 'How It Works Title' }),
-        whyDescription: fields.text({ label: 'How It Works Description', multiline: true }),
-        whyCtaLabel: fields.text({ label: 'How It Works CTA Label', defaultValue: 'Get started' }),
-        aboutEyebrow: fields.text({ label: 'About Eyebrow' }),
-        aboutTitle: fields.text({ label: 'About Title' }),
-        aboutDescription: fields.text({ label: 'About Description', multiline: true }),
-        aboutCta: fields.text({ label: 'About CTA Label' }),
-        comparisonEyebrow: fields.text({ label: 'Comparison Eyebrow', defaultValue: 'Why Us' }),
+        heroSecondaryCta: fields.text({
+          label: 'Hero Secondary CTA Label',
+          defaultValue: 'See the platform',
+          description: 'Links to Site Settings → Sign In / Platform URL.',
+        }),
+        servicesEyebrow: fields.text({ label: 'Capabilities Kicker', defaultValue: 'Capabilities' }),
+        servicesTitle: fields.text({ label: 'Capabilities Title' }),
+        servicesDescription: fields.text({ label: 'Capabilities Description', multiline: true }),
+        servicesHint: fields.text({
+          label: 'Capabilities Rail Hint',
+          defaultValue: 'Drag or scroll to explore',
+        }),
+        servicesCtaLabel: fields.text({
+          label: 'Capabilities CTA Label',
+          defaultValue: 'Explore all services',
+        }),
+        comparisonEyebrow: fields.text({ label: 'Comparison Kicker', defaultValue: 'Why Us' }),
         comparisonTitle: fields.text({ label: 'Comparison Title' }),
         comparisonDescription: fields.text({ label: 'Comparison Description', multiline: true }),
         comparisonOther: comparisonColumn,
         comparisonOurs: comparisonColumn,
-        testimonialsEyebrow: fields.text({ label: 'Testimonials Eyebrow', defaultValue: 'Testimonials' }),
-        testimonialsTitle: fields.text({ label: 'Testimonials Title' }),
-        testimonialsDescription: fields.text({
-          label: 'Testimonials Description',
-          multiline: true,
+        testimonialsEyebrow: fields.text({
+          label: 'Testimonials Kicker',
+          defaultValue: 'Testimonials',
         }),
-        faqEyebrow: fields.text({ label: 'FAQ Eyebrow', defaultValue: 'FAQ' }),
+        faqEyebrow: fields.text({ label: 'FAQ Kicker', defaultValue: 'FAQ' }),
         faqTitle: fields.text({ label: 'FAQ Title' }),
         faqDescription: fields.text({ label: 'FAQ Description', multiline: true }),
         faqBrowseAllLabel: fields.text({
           label: 'FAQ Browse All Label',
           defaultValue: 'Browse all FAQs →',
         }),
-        ctaEyebrow: fields.text({ label: 'Bottom CTA Eyebrow', defaultValue: 'Get Started' }),
+        ctaEyebrow: fields.text({ label: 'Bottom CTA Kicker', defaultValue: 'Get Started' }),
         ctaDescription: fields.text({ label: 'Bottom CTA Description', multiline: true }),
-        contactEyebrow: fields.text({ label: 'Contact Eyebrow' }),
-        contactTitle: fields.text({ label: 'Contact Title' }),
-        contactDescription: fields.text({ label: 'Contact Description', multiline: true }),
-        contactCta: fields.text({ label: 'Contact CTA Label' }),
         services: fields.array(serviceItem, {
-          label: 'Service Cards',
-          itemLabel: (props) => props.fields.title.value,
-        }),
-        whyItems: fields.array(whyItem, {
-          label: 'How It Works Steps',
+          label: 'Capability Cards',
           itemLabel: (props) => props.fields.title.value,
         }),
         carriers: fields.array(
@@ -272,21 +268,21 @@ export default config({
       path: 'src/content/about/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         heroTitle: fields.text({ label: 'Hero Title' }),
-        introTitle: fields.text({ label: 'Intro Title' }),
-        intro: fields.text({ label: 'Intro', multiline: true }),
-        missionLabel: fields.text({ label: 'Mission Label' }),
+        heroImage: imageField('Hero Image (full-width)', 'about'),
+        introEyebrow: fields.text({ label: 'Overview Kicker', defaultValue: 'Overview' }),
+        introTitle: fields.text({ label: 'Overview Title' }),
+        intro: fields.text({ label: 'Overview Body', multiline: true }),
+        missionLabel: fields.text({ label: 'Mission Kicker' }),
         missionTitle: fields.text({ label: 'Mission Title' }),
-        visionLabel: fields.text({ label: 'Vision Label' }),
-        visionTitle: fields.text({ label: 'Vision Title' }),
-        heroImage: imageField('Hero Image', 'about'),
+        missionBody: fields.text({ label: 'Mission Body', multiline: true }),
         missionImage: imageField('Mission Image', 'about'),
+        visionLabel: fields.text({ label: 'Vision Kicker' }),
+        visionTitle: fields.text({ label: 'Vision Title' }),
+        visionBody: fields.text({ label: 'Vision Body', multiline: true }),
         visionImage: imageField('Vision Image', 'about'),
-        sections: fields.array(aboutSection, {
-          label: 'Sections',
-          itemLabel: (props) => props.fields.title.value,
-        }),
+        ctaEyebrow: fields.text({ label: 'CTA Kicker', defaultValue: 'Get Started' }),
         ctaTitle: fields.text({ label: 'CTA Title Override (optional)' }),
         ctaDescription: fields.text({ label: 'CTA Description (optional)', multiline: true }),
       },
@@ -296,24 +292,47 @@ export default config({
       path: 'src/content/services/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         subtitle: fields.text({ label: 'Hero Title' }),
-        introTitle: fields.text({ label: 'Intro Title' }),
-        intro: fields.text({ label: 'Intro', multiline: true }),
-        introImage: imageField('Intro Image', 'services'),
+        introEyebrow: fields.text({ label: 'Overview Kicker', defaultValue: 'Overview' }),
+        introTitle: fields.text({ label: 'Overview Title' }),
+        intro: fields.text({ label: 'Overview Body', multiline: true }),
+        introImage: imageField('Overview Image', 'services'),
+        platformEyebrow: fields.text({ label: 'Platform Kicker', defaultValue: 'Platform' }),
+        platformTitle: fields.text({
+          label: 'Platform Title',
+          defaultValue: 'From request to authenticated delivery',
+        }),
+        platformDescription: fields.text({
+          label: 'Platform Description',
+          multiline: true,
+          defaultValue:
+            'One workflow that keeps every records request organized, visible, and ready for legal review.',
+        }),
+        features: fields.array(servicesFeature, {
+          label: 'Platform Steps',
+          itemLabel: (props) => props.fields.title.value,
+        }),
+        pathwaysEyebrow: fields.text({ label: 'Pathways Kicker', defaultValue: 'Pathways' }),
+        pathwaysTitle: fields.text({
+          label: 'Pathways Title',
+          defaultValue: 'Choose the process your jurisdiction requires',
+        }),
+        pathwaysDescription: fields.text({
+          label: 'Pathways Description',
+          multiline: true,
+          defaultValue:
+            'Whether you need a subpoena or a DWQ, Data for Lawyers helps you prepare, track, and manage the request end to end.',
+        }),
         offeringsLabel: fields.text({
-          label: 'Offerings Panel Label',
+          label: 'Pathway Bullets Label',
           defaultValue: 'Data for Lawyers helps you',
         }),
-        loadMoreLabel: fields.text({ label: 'Load More Label', defaultValue: 'Load More' }),
-        features: fields.array(servicesFeature, {
-          label: 'Core Features',
-          itemLabel: (props) => props.fields.title.value,
-        }),
         offerings: fields.array(servicesOffering, {
-          label: 'Service Offerings',
+          label: 'Pathways',
           itemLabel: (props) => props.fields.title.value,
         }),
+        ctaEyebrow: fields.text({ label: 'CTA Kicker', defaultValue: 'Get Started' }),
         ctaTitle: fields.text({ label: 'CTA Title' }),
         ctaDescription: fields.text({ label: 'CTA Description', multiline: true }),
       },
@@ -323,7 +342,7 @@ export default config({
       path: 'src/content/pricing/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         heroTitle: fields.text({ label: 'Hero Title' }),
         introTitle: fields.text({ label: 'Intro Title' }),
         intro: fields.text({ label: 'Intro', multiline: true }),
@@ -332,6 +351,7 @@ export default config({
           label: 'Plans',
           itemLabel: (props) => props.fields.name.value,
         }),
+        ctaEyebrow: fields.text({ label: 'CTA Kicker', defaultValue: 'Get Started' }),
       },
     }),
     blog: singleton({
@@ -339,15 +359,25 @@ export default config({
       path: 'src/content/blog/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         heroTitle: fields.text({ label: 'Hero Title' }),
-        introTitle: fields.text({ label: 'Intro Title' }),
-        intro: fields.text({ label: 'Intro', multiline: true }),
         description: fields.text({ label: 'Meta Description', multiline: true }),
         emptyState: fields.text({ label: 'Empty State Message', multiline: true }),
         defaultCoverImage: imageField('Default Cover Image', 'blog'),
+        featuredLabel: fields.text({ label: 'Featured Kicker', defaultValue: 'Featured' }),
+        featuredCtaLabel: fields.text({
+          label: 'Featured CTA Label',
+          defaultValue: 'Read article',
+        }),
+        latestEyebrow: fields.text({ label: 'Latest Kicker', defaultValue: 'Latest' }),
+        latestTitle: fields.text({
+          label: 'Latest Title',
+          defaultValue: 'More from the library',
+        }),
+        readMoreLabel: fields.text({ label: 'Card Read More Label', defaultValue: 'Read more' }),
         loadMoreLabel: fields.text({ label: 'Load More Label', defaultValue: 'Load More' }),
         backLabel: fields.text({ label: 'Back to Blog Label', defaultValue: '← Back to Blog' }),
+        ctaEyebrow: fields.text({ label: 'CTA Kicker', defaultValue: 'Get Started' }),
       },
     }),
     faqs: singleton({
@@ -355,7 +385,7 @@ export default config({
       path: 'src/content/faqs/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         heroTitle: fields.text({ label: 'Hero Title' }),
         description: fields.text({ label: 'Description', multiline: true }),
         items: fields.array(faqItem, {
@@ -363,6 +393,7 @@ export default config({
           itemLabel: (props) => props.fields.question.value,
         }),
         footerNote: fields.text({ label: 'Footer Note', multiline: true }),
+        ctaEyebrow: fields.text({ label: 'CTA Kicker', defaultValue: 'Get Started' }),
       },
     }),
     contact: singleton({
@@ -370,11 +401,15 @@ export default config({
       path: 'src/content/contact/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         description: fields.text({ label: 'Description', multiline: true }),
-        sectionEyebrow: fields.text({ label: 'Form Section Eyebrow' }),
-        formTitle: fields.text({ label: 'Form Section Title' }),
-        sideCtaLabel: fields.text({ label: 'Side CTA Label' }),
+        sectionEyebrow: fields.text({ label: 'Side Panel Kicker' }),
+        formTitle: fields.text({ label: 'Side Panel Title' }),
+        formPanelEyebrow: fields.text({ label: 'Form Kicker', defaultValue: 'Message' }),
+        formPanelTitle: fields.text({
+          label: 'Form Title',
+          defaultValue: 'Send us a note',
+        }),
         formSubmitLabel: fields.text({ label: 'Form Submit Label' }),
         namePlaceholder: fields.text({ label: 'Name Placeholder', defaultValue: 'Name' }),
         phonePlaceholder: fields.text({ label: 'Phone Placeholder', defaultValue: 'Phone' }),
@@ -390,7 +425,7 @@ export default config({
       path: 'src/content/privacy/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         description: fields.text({ label: 'Meta Description', multiline: true }),
         introTitle: fields.text({ label: 'Intro Title' }),
         intro: fields.text({ label: 'Intro', multiline: true }),
@@ -401,11 +436,11 @@ export default config({
       },
     }),
     terms: singleton({
-      label: 'Terms of Service',
+      label: 'Master Service Agreement',
       path: 'src/content/terms/',
       schema: {
         title: fields.text({ label: 'Page Title' }),
-        eyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        eyebrow: fields.text({ label: 'Hero Kicker' }),
         description: fields.text({ label: 'Meta Description', multiline: true }),
         introTitle: fields.text({ label: 'Intro Title' }),
         intro: fields.text({ label: 'Intro', multiline: true }),

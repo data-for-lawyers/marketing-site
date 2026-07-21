@@ -489,12 +489,6 @@
     font-size: 0.85rem;
   }
 
-  .carriers-kicker {
-    margin: 0 auto 1.25rem;
-    text-align: center;
-    width: fit-content;
-  }
-
   /* —— Logo cloud carousel —— */
   .logo-cloud {
     display: grid;
@@ -770,11 +764,14 @@
 
   .capability-card-title {
     margin: 0;
-    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
     font-weight: 600;
     letter-spacing: -0.015em;
     line-height: 1.2;
     color: var(--color-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .capability-card-desc {
@@ -783,11 +780,17 @@
     font-family: var(--font-sans);
     font-size: 0.95rem;
     line-height: 1.55;
+    min-height: calc(0.95rem * 1.55 * 3);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .capability-card-tags {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.4rem;
     margin: 0.35rem 0 0;
     padding: 0;
@@ -795,6 +798,10 @@
   }
 
   .capability-card-tags li {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 2rem;
     padding: 0.35rem 0.65rem;
     border-radius: 0.45rem;
     background: rgb(255 255 255 / 0.12);
@@ -803,6 +810,7 @@
     font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 500;
+    line-height: 1.3;
   }
 
   .capability-footer {

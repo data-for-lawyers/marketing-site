@@ -69,6 +69,7 @@ function normalizeServices(
 ) {
   return {
     ...services,
+    introImage: resolveCmsImage(services.introImage, '/images/services/'),
     features: services.features.map((feature) => ({
       ...feature,
       image: resolveCmsImage(feature.image, '/images/services/'),

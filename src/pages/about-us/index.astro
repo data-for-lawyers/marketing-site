@@ -1,9 +1,10 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import AboutCta from '../../components/AboutCta.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { getAboutContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
+import { withBase } from '../../lib/paths';
 
 const { site, about } = await getAboutContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/about-us');
@@ -16,29 +17,36 @@ const commitment =
 ---
 
 <SiteLayout title={about.title} description={about.intro}>
-  <section class="about-hero">
-    <div class="container-site">
-      <div class="about-hero-top reveal" data-reveal>
-        <p class="about-eyebrow">{about.eyebrow}</p>
-        <h1 class="about-hero-title">{about.heroTitle}</h1>
-      </div>
+  <PageHero eyebrow={about.eyebrow || about.title} title={about.heroTitle} />
 
-      <div class="about-hero-media reveal" data-reveal style="--reveal-delay: 100ms">
-        <img src={about.heroImage} alt="" />
+  {
+    about.heroImage && (
+      <section class="about-hero-image-section">
+        <div class="about-hero-media reveal" data-reveal>
+          <img src={about.heroImage} alt="" />
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section-light about-intro-section">
+    <div class="container-site">
+      <div class="about-intro reveal" data-reveal>
+        <p class="section-kicker">Overview</p>
+        <h2 class="about-intro-title">{about.introTitle}</h2>
+        <p class="about-intro-copy">{about.intro}</p>
       </div>
     </div>
   </section>
 
-  <section class="section section-light">
+  <section class="section section-light about-split-section">
     <div class="container-site">
-      <PageIntro title={about.introTitle} description={about.intro} />
-
       <div class="about-split reveal" data-reveal>
         <div class="about-split-media">
           <img src={about.missionImage} alt="" />
         </div>
         <div class="about-split-copy">
-          <p class="about-label">{about.missionLabel}</p>
+          <p class="section-kicker">{about.missionLabel}</p>
           <h2>{about.missionTitle}</h2>
           <p class="about-split-desc">{expertise?.body}</p>
         </div>
@@ -46,11 +54,11 @@ const commitment =
     </div>
   </section>
 
-  <section class="section section-light pt-0">
+  <section class="section section-light about-split-section pt-0">
     <div class="container-site">
       <div class="about-split is-reverse reveal" data-reveal>
         <div class="about-split-copy">
-          <p class="about-label">{about.visionLabel}</p>
+          <p class="section-kicker">{about.visionLabel}</p>
           <h2>{about.visionTitle}</h2>
           <p class="about-split-desc">{commitment?.body}</p>
         </div>
@@ -61,11 +69,11 @@ const commitment =
     </div>
   </section>
 
-  <AboutCta
+  <CtaBand
     title={about.ctaTitle || cta.title}
+    description={about.ctaDescription || ''}
+    eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl}
-    points={cta.points}
-    imageUrl={cta.imageUrl}
+    primaryUrl={site.signInUrl || withBase('/contact-us')}
   />
 </SiteLayout>

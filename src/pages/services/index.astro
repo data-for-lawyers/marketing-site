@@ -1,259 +1,133 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import PageIntro from '../../components/PageIntro.astro';
-import AboutCta from '../../components/AboutCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { getServicesContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
+import { withBase } from '../../lib/paths';
 
 const { site, services } = await getServicesContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/services');
 if (disabled) return disabled;
 const cta = getSharedCta(site);
-
-const serviceItems = [
-  ...services.features.map((item) => ({
-    title: item.title,
-    description: item.description,
-    href: '#offerings',
-    image: item.image,
-  })),
-  ...services.offerings.map((item, index) => ({
-    title: item.title,
-    description: item.description,
-    href: `#offering-${index}`,
-    image: item.image,
-  })),
-].filter((item) => item.image);
-
-const initialCount = 4;
+const features = services.features;
 ---
 
 <SiteLayout title={services.title} description={services.intro}>
   <PageHero eyebrow={services.eyebrow || services.title} title={services.subtitle} />
 
-  <section class="section section-light">
+  <section class="section svc-intro-section">
     <div class="container-site">
-      <PageIntro title={services.introTitle} description={services.intro} />
-
-      <div class="services-grid" data-blog-grid data-initial={initialCount}>
+      <div class="svc-intro-layout reveal" data-reveal>
+        <div class="svc-intro">
+          <p class="section-kicker">Overview</p>
+          <h2 class="svc-intro-title">{services.introTitle}</h2>
+          <p class="svc-intro-copy">{services.intro}</p>
+        </div>
         {
-          serviceItems.map((item, index) => (
-            <a
-              href={item.href}
-              class:list={['service-card', 'reveal', index >= initialCount && 'is-hidden']}
-              data-reveal
-              data-blog-card
-              style={`--reveal-delay: ${(index % initialCount) * 70}ms`}
-            >
-              <div class="service-card-media">
-                <img src={item.image} alt="" />
-                <div class="service-card-tag">
-                  <h3 class="service-card-tag-label">{item.title}</h3>
-                  <p class="service-card-tag-desc">{item.description}</p>
-                  <span class="service-card-tag-badge" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M7 17L17 7M9 7h8v8" />
-                    </svg>
-                  </span>
+          services.introImage && (
+            <div class="svc-intro-media">
+              <img src={services.introImage} alt="" />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    features.length > 0 && (
+      <section class="section svc-steps-section">
+        <div class="container-site">
+          <div class="svc-steps-intro reveal" data-reveal>
+            <p class="section-kicker">Platform</p>
+            <h2 class="svc-steps-title">From request to authenticated delivery</h2>
+            <p class="svc-steps-lead">
+              One workflow that keeps every records request organized, visible, and ready for legal review.
+            </p>
+          </div>
+
+          <ol class="svc-steps">
+            {features.map((feature, index) => (
+              <li
+                class="svc-step reveal"
+                data-reveal
+                style={`--reveal-delay: ${index * 70}ms; --step-accent: ${
+                  index % 2 === 0 ? 'var(--color-cyan)' : 'var(--color-orange)'
+                }`}
+              >
+                <span class="svc-step-num" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {feature.image && (
+                  <div class="svc-step-media">
+                    <img src={feature.image} alt="" />
+                  </div>
+                )}
+                <div class="svc-step-copy">
+                  <h3 class="svc-step-title">{feature.title}</h3>
+                  <p class="svc-step-desc">{feature.description}</p>
                 </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+
+  <section id="offerings" class="section svc-pathways-section">
+    <div class="container-site">
+      <div class="svc-pathways-intro is-center reveal" data-reveal>
+        <p class="section-kicker is-light">Pathways</p>
+        <h2 class="svc-pathways-title">Choose the process your jurisdiction requires</h2>
+        <p class="svc-pathways-lead">
+          Whether you need a subpoena or a DWQ, Data for Lawyers helps you prepare, track, and manage the request end to end.
+        </p>
+      </div>
+
+      <div class="svc-pathway-list">
+        {
+          services.offerings.map((offering, index) => (
+            <article
+              id={`offering-${index}`}
+              class:list={['svc-detail', index % 2 === 1 && 'is-reversed', 'reveal']}
+              data-reveal
+              style={`--reveal-delay: ${index * 90}ms`}
+            >
+              <div class="svc-detail-copy">
+                <p class="section-kicker is-light svc-detail-kicker">
+                  Pathway {String(index + 1).padStart(2, '0')}
+                </p>
+                <h3 class="svc-detail-title">{offering.title}</h3>
+                <p class="svc-detail-desc">{offering.description}</p>
+                <p class="svc-detail-label">{services.offeringsLabel}</p>
+                <ul class="svc-detail-bullets">
+                  {offering.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
               </div>
-            </a>
+
+              <div class="svc-detail-media">
+                {offering.image ? (
+                  <img src={offering.image} alt="" />
+                ) : (
+                  <div class="svc-detail-media-fallback" aria-hidden="true" />
+                )}
+              </div>
+            </article>
           ))
         }
       </div>
-
-      {
-        serviceItems.length > initialCount && (
-          <div class="services-load-more">
-            <button type="button" class="btn btn-primary" data-blog-load-more>
-              {services.loadMoreLabel}
-            </button>
-          </div>
-        )
-      }
     </div>
   </section>
 
-  <section id="offerings" class="section section-light pt-0">
-    <div class="container-site services-offerings">
-      {
-        services.offerings.map((offering, index) => (
-          <article
-            id={`offering-${index}`}
-            class="services-offering reveal"
-            data-reveal
-            style={`--reveal-delay: ${index * 80}ms`}
-          >
-            <div class="services-offering-copy">
-              <h2>{offering.title}</h2>
-              <p>{offering.description}</p>
-            </div>
-            <div class="services-offering-panel">
-              <p class="services-offering-label">{services.offeringsLabel}</p>
-              <ul class="services-offering-list">
-                {offering.bullets.map((bullet) => (
-                  <li>{bullet}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <AboutCta
+  <CtaBand
     title={services.ctaTitle || cta.title}
+    description={services.ctaDescription || ''}
+    eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl}
-    points={cta.points}
-    imageUrl={cta.imageUrl}
+    primaryUrl={site.signInUrl || withBase('/contact-us')}
   />
 </SiteLayout>
-
-<style is:global>
-  .services-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: minmax(14rem, auto) auto;
-    gap: 2rem 1.25rem;
-  }
-
-  @media (min-width: 800px) {
-    .services-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2.5rem 1.5rem;
-    }
-  }
-
-  .service-card {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 2;
-    overflow: hidden;
-    border-radius: 1.35rem;
-    text-decoration: none;
-    color: inherit;
-    background: var(--color-echo);
-  }
-
-  .service-card.is-hidden {
-    display: none !important;
-  }
-
-  .service-card-media {
-    display: contents;
-  }
-
-  .service-card-media img {
-    grid-row: 1 / -1;
-    grid-column: 1;
-    width: 100%;
-    height: 100%;
-    min-height: 14rem;
-    object-fit: cover;
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .service-card:hover .service-card-media img {
-    transform: scale(1.05);
-  }
-
-  .service-card .service-card-tag-label {
-    margin: 0;
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-  }
-
-  .service-card .service-card-tag-desc {
-    margin: 0;
-  }
-
-  .services-load-more {
-    display: flex;
-    justify-content: center;
-    margin-top: 2.75rem;
-  }
-
-  .services-offerings {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .services-offering {
-    display: grid;
-    gap: 1.5rem;
-    padding: 1.75rem;
-    border-radius: 1.5rem;
-    background: #ffffff;
-    border: 1px solid #dfe3dc;
-  }
-
-  @media (min-width: 900px) {
-    .services-offering {
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2.5rem;
-      align-items: center;
-      padding: 2rem;
-    }
-  }
-
-  .services-offering-copy h2 {
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    color: #221f20;
-  }
-
-  .services-offering-copy p {
-    margin-top: 0.9rem;
-    color: #6b736f;
-    font-size: 1.02rem;
-    line-height: 1.75;
-  }
-
-  .services-offering-panel {
-    padding: 1.4rem 1.5rem;
-    border-radius: 1.25rem;
-    background: #f0f2ed;
-  }
-
-  .services-offering-label {
-    margin-bottom: 1rem;
-    color: #221f20;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .services-offering-list {
-    display: grid;
-    gap: 0.8rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .services-offering-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
-    color: #221f20;
-    font-size: 0.98rem;
-    line-height: 1.45;
-  }
-
-  .services-offering-list li::before {
-    content: "";
-    flex-shrink: 0;
-    width: 1.15rem;
-    height: 1.15rem;
-    margin-top: 0.15rem;
-    border-radius: 0.25rem;
-    background:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 10.5l3 3 7-7' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-      center / 0.65rem no-repeat,
-      #d18850;
-  }
-</style>

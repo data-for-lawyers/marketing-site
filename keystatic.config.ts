@@ -300,6 +300,7 @@ export default config({
         subtitle: fields.text({ label: 'Hero Title' }),
         introTitle: fields.text({ label: 'Intro Title' }),
         intro: fields.text({ label: 'Intro', multiline: true }),
+        introImage: imageField('Intro Image', 'services'),
         offeringsLabel: fields.text({
           label: 'Offerings Panel Label',
           defaultValue: 'Data for Lawyers helps you',

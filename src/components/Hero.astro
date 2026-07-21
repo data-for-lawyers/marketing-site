@@ -5,28 +5,17 @@ interface Props {
   ctaLabel: string;
   ctaUrl: string;
   imageUrl: string;
-  trustCount: string;
-  trustCopy: string;
-  floatLabel: string;
-  floatMeta: string;
-  avatars?: readonly string[];
 }
 
-const {
-  title,
-  subtitle,
-  ctaLabel,
-  ctaUrl,
-  imageUrl,
-  trustCount,
-  trustCopy,
-  floatLabel,
-  floatMeta,
-  avatars = [],
-} = Astro.props;
+const { title, subtitle, ctaLabel, ctaUrl, imageUrl } = Astro.props;
 ---
 
 <section class="hero-shell">
+  <div class="hero-media" aria-hidden="true">
+    <img class="hero-media-img" src={imageUrl} alt="" />
+    <div class="hero-media-wash"></div>
+  </div>
+
   <div class="hero-inner">
     <div class="hero-animate hero-copy">
       <h1 class="hero-title">{title}</h1>
@@ -34,33 +23,15 @@ const {
 
       <div class="hero-actions">
         <a href={ctaUrl} class="btn btn-primary">{ctaLabel}</a>
-      </div>
-
-      <div class="hero-trust">
-        <div class="hero-avatars" aria-hidden="true">
-          {avatars.map((src) => <img src={src} alt="" />)}
-          <span class="hero-count">{trustCount}</span>
-        </div>
-        <p class="hero-trust-copy">{trustCopy}</p>
-      </div>
-    </div>
-
-    <div class="hero-preview-animate hero-visual">
-      <img class="hero-photo" src={imageUrl} alt="" />
-      <div class="hero-float" aria-hidden="true">
-        <p class="hero-float-label">{floatLabel}</p>
-        <p class="hero-float-meta">{floatMeta}</p>
-        <div class="hero-float-chart">
-          <svg viewBox="0 0 180 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M4 42 C24 40, 34 28, 48 30 C62 32, 70 18, 86 20 C102 22, 112 34, 128 24 C144 14, 156 10, 176 8"
-              stroke="#ffffff"
-              stroke-width="2.5"
-              stroke-linecap="round"></path>
-            <circle cx="128" cy="24" r="4.5" fill="#ffffff"></circle>
+        <a href="#platform" class="hero-secondary">
+          See the platform
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" />
           </svg>
-        </div>
+        </a>
       </div>
     </div>
   </div>
+
+  <div class="hero-edge" aria-hidden="true"></div>
 </section>

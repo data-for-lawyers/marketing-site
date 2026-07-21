@@ -40,18 +40,61 @@ export function initTestimonials() {
     const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-testimonial-dot]')];
     const prev = root.querySelector<HTMLButtonElement>('[data-testimonial-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-testimonial-next]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let index = 0;
+    let timer: number | undefined;
 
     const show = (nextIndex: number) => {
       index = (nextIndex + slides.length) % slides.length;
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle('active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      dots.forEach((dot, i) => {
+        const active = i === index;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
     };
 
-    prev?.addEventListener('click', () => show(index - 1));
-    next?.addEventListener('click', () => show(index + 1));
-    dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+    const stop = () => {
+      if (timer !== undefined) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    };
+
+    const start = () => {
+      if (reduceMotion || slides.length < 2) return;
+      stop();
+      timer = window.setInterval(() => show(index + 1), 5600);
+    };
+
+    prev?.addEventListener('click', () => {
+      show(index - 1);
+      start();
+    });
+    next?.addEventListener('click', () => {
+      show(index + 1);
+      start();
+    });
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        show(i);
+        start();
+      }),
+    );
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', (event) => {
+      if (!root.contains(event.relatedTarget as Node | null)) start();
+    });
+
     show(0);
+    start();
   });
 }
 
@@ -179,6 +222,51 @@ export function initPlatformExplorer() {
   });
 }
 
+export function initCapabilityRail() {
+  document.querySelectorAll<HTMLElement>('.capability-track').forEach((track) => {
+    if (track.dataset.bound === 'true') return;
+    track.dataset.bound = 'true';
+
+    let pointerId: number | null = null;
+    let startX = 0;
+    let startScroll = 0;
+    let moved = false;
+
+    track.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'touch') return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startScroll = track.scrollLeft;
+      moved = false;
+      track.setPointerCapture(pointerId);
+      track.classList.add('is-dragging');
+    });
+
+    track.addEventListener('pointermove', (event) => {
+      if (pointerId === null || event.pointerId !== pointerId) return;
+      const delta = event.clientX - startX;
+      if (Math.abs(delta) > 4) moved = true;
+      track.scrollLeft = startScroll - delta;
+    });
+
+    const endDrag = (event: PointerEvent) => {
+      if (pointerId === null || event.pointerId !== pointerId) return;
+      track.releasePointerCapture(pointerId);
+      track.classList.remove('is-dragging');
+      pointerId = null;
+    };
+
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
+    track.addEventListener('click', (event) => {
+      if (!moved) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+  });
+}
+
 export function initRevealAnimations() {
   const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
   if (!elements.length) return;
@@ -217,6 +305,7 @@ export function initSiteScripts() {
   initMobileMenu();
   initBlogLoadMore();
   initPlatformExplorer();
+  initCapabilityRail();
   initRevealAnimations();
 }
 

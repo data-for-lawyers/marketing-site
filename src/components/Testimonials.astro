@@ -3,6 +3,7 @@ type Testimonial = {
   name: string;
   role: string;
   quote: string;
+  image?: string | null;
 };
 
 interface Props {
@@ -11,30 +12,95 @@ interface Props {
   items: readonly Testimonial[];
 }
 
-const { title, description, items } = Astro.props;
+const { description, items } = Astro.props;
+
+function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('');
+}
 ---
 
-<section class="section section-light">
-  <div class="container-site section-stack">
-    <div class="reveal text-center" data-reveal>
-      <h2>{title}</h2>
-      <p class="section-copy mx-auto mt-4 max-w-2xl">{description}</p>
-    </div>
+{
+  items.length > 0 && (
+    <section class="section testimonials-section">
+      <div class="container-site">
+        <div
+          class="testimonials-stage reveal"
+          data-reveal
+          data-testimonials
+        >
+          <p class="testimonials-eyebrow">
+            {description || 'Hear from the decision makers themselves!'}
+          </p>
 
-    <div class="grid gap-5 md:grid-cols-3">
-      {
-        items.map((item, index) => (
-          <article
-            class="testimonial-card reveal"
-            data-reveal
-            style={`--reveal-delay: ${index * 80}ms`}
-          >
-            <p class="testimonial-quote">“{item.quote}”</p>
-            <p class="testimonial-name">{item.name}</p>
-            <p class="testimonial-role">{item.role}</p>
-          </article>
-        ))
-      }
-    </div>
-  </div>
-</section>
+          <div class="testimonials-frame">
+            <button
+              type="button"
+              class="testimonials-nav is-prev"
+              data-testimonial-prev
+              aria-label="Previous testimonial"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            <div class="testimonials-viewport">
+              <span class="testimonials-marks" aria-hidden="true">“”</span>
+
+              {items.map((item, index) => (
+                <figure
+                  class:list={['testimonial-slide', index === 0 && 'active']}
+                  data-testimonial-slide
+                  aria-hidden={index === 0 ? 'false' : 'true'}
+                >
+                  <blockquote class="testimonial-quote">{item.quote}</blockquote>
+                  <figcaption class="testimonial-person">
+                    {item.image ? (
+                      <img class="testimonial-avatar-img" src={item.image} alt="" />
+                    ) : (
+                      <span class="testimonial-avatar" aria-hidden="true">
+                        {initials(item.name)}
+                      </span>
+                    )}
+                    <p class="testimonial-meta">
+                      <span class="testimonial-name">{item.name}</span>
+                      <span class="testimonial-sep">,</span>
+                      <span class="testimonial-role">{item.role}</span>
+                    </p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              class="testimonials-nav is-next"
+              data-testimonial-next
+              aria-label="Next testimonial"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="testimonials-dots" role="tablist" aria-label="Choose testimonial">
+            {items.map((_, index) => (
+              <button
+                type="button"
+                class:list={['testimonials-dot', index === 0 && 'active']}
+                data-testimonial-dot
+                aria-label={`Show testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -1,6 +1,4 @@
 ---
-import SectionHeader from './SectionHeader.astro';
-
 type Column = {
   title: string;
   description: string;
@@ -17,26 +15,45 @@ interface Props {
 const { title, description, other, ours } = Astro.props;
 ---
 
-<section class="section section-light">
+<section id="why-us" class="section compare-section">
   <div class="container-site section-stack">
-    <div class="reveal" data-reveal>
-      <SectionHeader title={title} description={description} align="center" />
+    <div class="compare-intro reveal" data-reveal>
+      <h2 class="compare-heading">{title}</h2>
+      <p class="compare-lead">{description}</p>
     </div>
 
-    <div class="compare-grid">
-      <article class="compare-card is-muted reveal" data-reveal>
-        <h3 class="compare-title">{other.title}</h3>
-        <p class="compare-desc">{other.description}</p>
-        <ul class="compare-list">
-          {other.bullets.map((bullet) => <li>{bullet}</li>)}
+    <div class="compare-split">
+      <article class="compare-pane is-muted reveal" data-reveal>
+        <h3 class="compare-pane-title">{other.title}</h3>
+        <p class="compare-pane-desc">{other.description}</p>
+        <ul class="compare-pane-list">
+          {other.bullets.map((bullet) => (
+            <li>
+              <span class="compare-pane-mark" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none">
+                  <path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              {bullet}
+            </li>
+          ))}
         </ul>
       </article>
 
-      <article class="compare-card is-accent reveal" data-reveal style="--reveal-delay: 90ms">
-        <h3 class="compare-title">{ours.title}</h3>
-        <p class="compare-desc">{ours.description}</p>
-        <ul class="compare-list">
-          {ours.bullets.map((bullet) => <li>{bullet}</li>)}
+      <article class="compare-pane is-accent reveal" data-reveal style="--reveal-delay: 90ms">
+        <h3 class="compare-pane-title">{ours.title}</h3>
+        <p class="compare-pane-desc">{ours.description}</p>
+        <ul class="compare-pane-list">
+          {ours.bullets.map((bullet) => (
+            <li>
+              <span class="compare-pane-mark" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none">
+                  <path d="M5 10.5l3 3 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              {bullet}
+            </li>
+          ))}
         </ul>
       </article>
     </div>

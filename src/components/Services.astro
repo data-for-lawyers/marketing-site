@@ -1,5 +1,4 @@
 ---
-import SectionHeader from './SectionHeader.astro';
 import { withBase } from '../lib/paths';
 
 type Service = {
@@ -21,81 +20,53 @@ const items = services.filter((service) => service.image).slice(0, 5);
 
 {
   items.length > 0 && (
-    <section id="platform" class="section platform-section">
-      <div class="container-site section-stack">
-        <div class="reveal" data-reveal>
-          <SectionHeader title={title} description={description} align="center" />
+    <section id="platform" class="section capability-section">
+      <div class="capability-intro reveal" data-reveal>
+        <div class="container-site">
+          <p class="capability-kicker">Capabilities</p>
+          <h2 class="capability-title">{title}</h2>
+          {description && <p class="capability-copy">{description}</p>}
         </div>
+      </div>
 
-        <div
-          class="platform-explorer reveal"
-          data-reveal
-          data-platform-explorer
-          style="--reveal-delay: 80ms"
-        >
-          <div class="platform-nav" role="tablist" aria-label="Platform capabilities">
-            {items.map((service, index) => (
-              <button
-                type="button"
-                class:list={['platform-nav-item', index === 0 && 'is-active']}
-                role="tab"
-                id={`platform-tab-${index}`}
-                aria-selected={index === 0 ? 'true' : 'false'}
-                aria-controls={`platform-panel-${index}`}
-                data-platform-tab
-                data-index={index}
-              >
-                <span class="platform-nav-index" aria-hidden="true">
+      <div class="capability-rail reveal" data-reveal style="--reveal-delay: 90ms">
+        <div class="capability-track">
+          {items.map((service, index) => (
+            <a
+              href={withBase('/services')}
+              class="capability-card"
+              style={`--card-accent: ${index % 2 === 0 ? 'var(--color-cyan)' : 'var(--color-orange)'}`}
+            >
+              <div class="capability-card-media">
+                <img src={service.image!} alt="" />
+              </div>
+              <div class="capability-card-body">
+                <span class="capability-card-index" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span class="platform-nav-copy">
-                  <span class="platform-nav-title">{service.title}</span>
-                  <span class="platform-nav-desc">{service.description}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div class="platform-stage">
-            {items.map((service, index) => (
-              <div
-                class:list={['platform-panel', index === 0 && 'is-active']}
-                role="tabpanel"
-                id={`platform-panel-${index}`}
-                aria-labelledby={`platform-tab-${index}`}
-                data-platform-panel
-                data-index={index}
-                aria-hidden={index === 0 ? 'false' : 'true'}
-              >
-                <div class="platform-visual">
-                  <img src={service.image!} alt="" />
-                  <div class="platform-visual-shade" aria-hidden="true" />
-                </div>
-
-                <div class="platform-detail">
-                  <p class="platform-detail-kicker">Capability {String(index + 1).padStart(2, '0')}</p>
-                  <h3 class="platform-detail-title">{service.title}</h3>
-                  <p class="platform-detail-desc">{service.description}</p>
-
-                  {service.bullets && service.bullets.length > 0 && (
-                    <ul class="platform-bullets">
-                      {service.bullets.map((bullet) => (
-                        <li>{bullet}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <a class="platform-link" href={withBase('/services')}>
-                    Explore all services
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M7 17L17 7M9 7h8v8" />
-                    </svg>
-                  </a>
-                </div>
+                <h3 class="capability-card-title">{service.title}</h3>
+                <p class="capability-card-desc">{service.description}</p>
+                {service.bullets && service.bullets.length > 0 && (
+                  <ul class="capability-card-tags">
+                    {service.bullets.slice(0, 3).map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            ))}
-          </div>
+            </a>
+          ))}
         </div>
+      </div>
+
+      <div class="container-site capability-footer reveal" data-reveal style="--reveal-delay: 140ms">
+        <p class="capability-hint">Drag or scroll to explore</p>
+        <a class="capability-cta" href={withBase('/services')}>
+          Explore all services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" />
+          </svg>
+        </a>
       </div>
     </section>
   )

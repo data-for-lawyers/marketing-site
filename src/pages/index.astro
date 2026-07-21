@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import StatsSection from '../components/StatsSection.astro';
 import Services from '../components/Services.astro';
-import HowItWorks from '../components/HowItWorks.astro';
 import Comparison from '../components/Comparison.astro';
 import Testimonials from '../components/Testimonials.astro';
 import FAQ from '../components/FAQ.astro';
@@ -35,11 +34,6 @@ const cta = getSharedCta(site);
       ctaLabel={homepage.heroCta}
       ctaUrl={withBase(homepage.heroCtaUrl || site.headerCtaUrl)}
       imageUrl={homepage.heroImage}
-      trustCount={homepage.heroTrustCount}
-      trustCopy={homepage.heroTrustCopy}
-      floatLabel={homepage.heroFloatLabel}
-      floatMeta={homepage.heroFloatMeta}
-      avatars={homepage.heroAvatars}
     />
 
     <StatsSection carriers={homepage.carriers} />
@@ -48,15 +42,6 @@ const cta = getSharedCta(site);
       title={homepage.servicesTitle}
       description={homepage.servicesDescription}
       services={homepage.services}
-    />
-
-    <HowItWorks
-      eyebrow={homepage.whyEyebrow}
-      title={homepage.whyTitle}
-      description={homepage.whyDescription}
-      items={homepage.whyItems}
-      signInUrl={site.signInUrl}
-      ctaLabel={homepage.whyCtaLabel}
     />
 
     <Comparison

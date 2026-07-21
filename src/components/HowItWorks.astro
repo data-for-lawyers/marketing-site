@@ -1,6 +1,4 @@
 ---
-import SectionHeader from './SectionHeader.astro';
-
 type Item = {
   title: string;
   description: string;
@@ -20,26 +18,21 @@ const { eyebrow, title, description, items, signInUrl, ctaLabel = 'Get started' 
 
 <section id="how-it-works" class="section process-section">
   <div class="container-site section-stack">
-    <div class="reveal" data-reveal>
-      <SectionHeader
-        eyebrow={eyebrow}
-        title={title}
-        description={description}
-        align="center"
-        tone="dark"
-      />
+    <div class="process-intro reveal" data-reveal>
+      {eyebrow && <p class="process-kicker">{eyebrow}</p>}
+      <h2 class="process-heading">{title}</h2>
+      <p class="process-lead">{description}</p>
     </div>
 
-    <ol class="process-journey">
+    <div class="process-flow reveal" data-reveal style="--reveal-delay: 80ms">
       {
         items.map((step, index) => (
-          <li
-            class="process-node reveal"
-            data-reveal
-            style={`--reveal-delay: ${index * 100}ms`}
-          >
-            <div class="process-node-marker" aria-hidden="true">
-              <span class="process-node-ring">
+          <>
+            <article class="process-flow-step">
+              <p class="process-flow-num" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <div class="process-flow-icon" aria-hidden="true">
                 {index % 4 === 0 && (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 3v12" />
@@ -66,17 +59,22 @@ const { eyebrow, title, description, items, signInUrl, ctaLabel = 'Get started' 
                     <path d="M9 3h6v4H9z" />
                   </svg>
                 )}
-              </span>
-              <span class="process-node-num">{String(index + 1).padStart(2, '0')}</span>
-            </div>
-            <div class="process-node-body">
-              <h3 class="process-title">{step.title}</h3>
-              <p class="process-desc">{step.description}</p>
-            </div>
-          </li>
+              </div>
+              <h3 class="process-flow-title">{step.title}</h3>
+              <p class="process-flow-desc">{step.description}</p>
+            </article>
+
+            {index < items.length - 1 && (
+              <div class="process-flow-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </div>
+            )}
+          </>
         ))
       }
-    </ol>
+    </div>
 
     <div class="process-cta reveal" data-reveal>
       <a href={signInUrl} class="btn btn-primary">{ctaLabel}</a>

@@ -4,7 +4,6 @@ import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { getAboutContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
-import { withBase } from '../../lib/paths';
 
 const { site, about } = await getAboutContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/about-us');
@@ -74,6 +73,6 @@ const commitment =
     description={about.ctaDescription || ''}
     eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl || withBase('/contact-us')}
+    points={cta.points}
   />
 </SiteLayout>

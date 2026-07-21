@@ -2,9 +2,10 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import PageIntro from '../../components/PageIntro.astro';
-import AboutCta from '../../components/AboutCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { getPricingContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
+import { withBase } from '../../lib/paths';
 
 const { site, pricing } = await getPricingContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/pricing');
@@ -41,7 +42,7 @@ const cta = getSharedCta(site);
                 ))}
               </ul>
 
-              <a href={site.signInUrl} class:list={['pricing-cta', plan.featured ? 'is-primary' : 'is-muted']}>
+              <a href={withBase('/contact-us')} class:list={['pricing-cta', plan.featured ? 'is-primary' : 'is-muted']}>
                 {plan.cta}
               </a>
             </article>
@@ -51,12 +52,11 @@ const cta = getSharedCta(site);
     </div>
   </section>
 
-  <AboutCta
+  <CtaBand
     title={cta.title}
+    eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl}
     points={cta.points}
-    imageUrl={cta.imageUrl}
   />
 </SiteLayout>
 

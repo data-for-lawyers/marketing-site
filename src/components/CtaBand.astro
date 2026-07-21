@@ -1,28 +1,66 @@
 ---
+import { withBase } from '../lib/paths';
+
 interface Props {
   title: string;
-  description: string;
+  description?: string;
   eyebrow?: string;
   primaryLabel: string;
-  primaryUrl: string;
+  primaryUrl?: string;
   secondaryLabel?: string;
   secondaryUrl?: string;
+  /** Kept for compatibility; image is no longer shown. */
+  imageUrl?: string | null;
+  points?: readonly string[];
 }
 
-const { title, description, eyebrow = 'Get Started', primaryLabel, primaryUrl } = Astro.props;
+const {
+  title,
+  description = '',
+  eyebrow = 'Get Started',
+  primaryLabel,
+  primaryUrl = withBase('/contact-us'),
+  secondaryLabel,
+  secondaryUrl,
+  points = [],
+} = Astro.props;
 ---
 
-<section class="section section-light">
+<section class="section section-light cta-section">
   <div class="container-site">
     <div class="cta-band reveal" data-reveal>
-      <p class="section-kicker is-light cta-kicker">{eyebrow}</p>
-      <h2 class="mx-auto max-w-3xl">{title}</h2>
-      {
-        description && (
-          <p class="mx-auto mt-4 max-w-xl text-white/65">{description}</p>
-        )
-      }
-      <a href={primaryUrl} class="btn btn-primary mt-8">{primaryLabel}</a>
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="cta-copy">
+        <p class="section-kicker is-light cta-kicker">{eyebrow}</p>
+        <h2 class="cta-title">{title}</h2>
+        {
+          description && (
+            <p class="cta-desc">{description}</p>
+          )
+        }
+        {
+          points.length > 0 && (
+            <ul class="cta-points">
+              {points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          )
+        }
+        <div class="cta-actions">
+          <a href={primaryUrl} class="btn btn-primary cta-primary">{primaryLabel}</a>
+          {
+            secondaryLabel && secondaryUrl ? (
+              <a href={secondaryUrl} class="cta-secondary">
+                {secondaryLabel}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            ) : null
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>

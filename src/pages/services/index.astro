@@ -4,7 +4,6 @@ import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { getServicesContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
-import { withBase } from '../../lib/paths';
 
 const { site, services } = await getServicesContent();
 const disabled = notFoundIfDisabled(site.pagesEnabled, '/services');
@@ -128,6 +127,6 @@ const features = services.features;
     description={services.ctaDescription || ''}
     eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl || withBase('/contact-us')}
+    points={cta.points}
   />
 </SiteLayout>

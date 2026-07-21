@@ -1,6 +1,4 @@
 ---
-import SectionHeader from './SectionHeader.astro';
-
 interface Props {
   eyebrow: string;
   title: string;
@@ -33,35 +31,61 @@ const {
 const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
 ---
 
-<section id="contact" class="section section-muted">
+<section id="contact" class="section contact-section">
   <div class="container-site">
-    <div
-      class="reveal grid gap-10 rounded-[1.5rem] border border-[var(--color-border)] bg-white p-8 md:p-12 lg:grid-cols-2"
-      data-reveal
-    >
-      <div>
-        <SectionHeader eyebrow={eyebrow} title={title} description={description} />
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href={ctaUrl} class="btn btn-dark">{ctaLabel}</a>
-          <a href={phoneHref} class="btn btn-outline">{phone}</a>
+    <div class="contact-layout reveal" data-reveal>
+      <div class="contact-copy">
+        <p class="section-kicker">{eyebrow}</p>
+        <h2 class="contact-title">{title}</h2>
+        <p class="contact-desc">{description}</p>
+
+        <div class="contact-details">
+          <a href={phoneHref} class="contact-detail">
+            <span class="contact-detail-label">Phone</span>
+            <span class="contact-detail-value">{phone}</span>
+          </a>
+          <a href={`mailto:${email}`} class="contact-detail">
+            <span class="contact-detail-label">Email</span>
+            <span class="contact-detail-value">{email}</span>
+          </a>
         </div>
-        <a
-          href={`mailto:${email}`}
-          class="mt-6 inline-block text-sm font-semibold text-[var(--color-ink)] no-underline"
-        >
-          {email}
-        </a>
+
+        {
+          ctaLabel && ctaUrl && (
+            <a href={ctaUrl} class="btn btn-dark contact-side-cta">
+              {ctaLabel}
+            </a>
+          )
+        }
       </div>
 
-      <form class="grid gap-4" action="#" method="post">
-        <input class="form-input" type="text" name="name" placeholder={namePlaceholder} required />
-        <input class="form-input" type="tel" name="phone" placeholder={phonePlaceholder} />
-        <input class="form-input" type="email" name="email" placeholder={emailPlaceholder} required />
-        <textarea
-          class="form-input min-h-[140px] resize-none"
-          name="message"
-          placeholder={messagePlaceholder}></textarea>
-        <button type="submit" class="btn btn-primary w-fit">{submitLabel}</button>
+      <form class="contact-form" action="#" method="post">
+        <p class="section-kicker">Message</p>
+        <h3 class="contact-form-title">Send us a note</h3>
+        <div class="contact-form-fields">
+          <label class="contact-field">
+            <span class="contact-field-label">Name</span>
+            <input class="form-input" type="text" name="name" placeholder={namePlaceholder} required />
+          </label>
+          <label class="contact-field">
+            <span class="contact-field-label">Phone</span>
+            <input class="form-input" type="tel" name="phone" placeholder={phonePlaceholder} />
+          </label>
+          <label class="contact-field">
+            <span class="contact-field-label">Email</span>
+            <input class="form-input" type="email" name="email" placeholder={emailPlaceholder} required />
+          </label>
+          <label class="contact-field">
+            <span class="contact-field-label">Message</span>
+            <textarea
+              class="form-textarea"
+              name="message"
+              placeholder={messagePlaceholder}
+              required
+            ></textarea>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary contact-submit">{submitLabel}</button>
       </form>
     </div>
   </div>

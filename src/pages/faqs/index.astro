@@ -2,7 +2,7 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import FAQ from '../../components/FAQ.astro';
-import AboutCta from '../../components/AboutCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { getFaqsContent, getSharedCta } from '../../lib/content';
 import { notFoundIfDisabled } from '../../lib/pages';
 
@@ -35,11 +35,10 @@ const cta = getSharedCta(site);
     )
   }
 
-  <AboutCta
+  <CtaBand
     title={cta.title}
+    eyebrow="Get Started"
     primaryLabel={cta.primaryLabel}
-    primaryUrl={site.signInUrl}
     points={cta.points}
-    imageUrl={cta.imageUrl}
   />
 </SiteLayout>

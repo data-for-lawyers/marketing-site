@@ -1,21 +1,18 @@
-heroTitle: Obtain Mobile Carrier & Third-Party Records Faster
+heroTitle: Chase is here
 heroSubtitle: >-
   Automate records requests, track every request, and receive authenticated
   carrier and third-party records through one secure, organized platform.
-heroImage: /images/homepage/hero.jpg
+heroImage: /images/homepage/heroImage.jpg
 heroCta: Get in touch
 heroSecondaryCta: See the platform
+servicesEyebrow: Capabilities
 servicesTitle: A Better Way to Retrieve Records
 servicesDescription: >-
   Scroll through the capabilities that help legal teams move from request to
   authenticated delivery — without the usual chaos.
-servicesEyebrow: Capabilities
 servicesHint: Drag or scroll to explore
 servicesCtaLabel: Explore all services
 comparisonEyebrow: Why Us
-testimonialsEyebrow: Testimonials
-faqEyebrow: FAQ
-ctaEyebrow: Get Started
 comparisonTitle: Why Legal Teams Choose Us Over Manual Processes
 comparisonDescription: >-
   We focus on delivering tailored records workflows, clear communication, and
@@ -42,83 +39,86 @@ comparisonOurs:
     - Authenticated, organized delivery
     - Carrier coverage in one place
     - Dedicated expert support
+testimonialsEyebrow: Testimonials
+faqEyebrow: FAQ
 faqTitle: Frequently Asked Questions About Services
 faqDescription: >-
   Find clear and concise answers to common questions about our process,
   services, and how we support legal teams with records retrieval.
 faqBrowseAllLabel: Browse all FAQs →
+ctaEyebrow: Get Started
 ctaDescription: >-
   Schedule a consultation and see how Data for Lawyers simplifies authenticated
   carrier and third-party records retrieval.
 services:
   - title: Efficient Request Management
     description: Submit requests in minutes through a secure online platform.
-    image: /images/homepage/services/service-1.jpg
     bullets:
       - Centralized request management
       - Real-time status updates
       - Unlimited request history
       - Secure document storage
+    image: /images/homepage/services/services/0/image.jpg
   - title: Authenticated Document Delivery
     description: Receive organized, authenticated records ready for legal review.
-    image: /images/homepage/services/service-2.jpg
     bullets:
       - Carrier-specific requests
       - Authenticated PDF production
       - Complete metadata
       - Chain-of-custody documentation
       - Organized delivery
+    image: /images/homepage/services/services/1/image.jpg
   - title: Intelligent Automation
     description: Technology handles repetitive tasks so your team can focus on your case.
-    image: /images/homepage/services/service-3.jpg
     bullets:
       - Automated workflows
       - Request tracking
       - Quality verification
       - Faster turnaround
+    image: /images/homepage/services/services/2/image.jpg
   - title: Expert Support
     description: >-
       When questions arise, our experienced team is available to help with
       records requests, documentation, and technical questions.
-    image: /images/homepage/services/service-4.jpg
     bullets:
       - Dedicated case managers for complex requests
       - Technical support for data interpretation
       - Expert consultation for special requirements
+    image: /images/homepage/services/services/3/image.jpg
   - title: Results You Can Trust
     description: Consistent outcomes backed by authenticated delivery and expert support.
-    image: /images/homepage/services/service-5.jpg
     bullets:
       - Reduce administrative work
       - Prepare records faster
       - Improve organization
       - Maintain documentation integrity
       - Deliver consistent results
+    image: /images/homepage/services/services/4/image.jpg
 carriers:
   - name: AT&T
-    logo: /images/carriers/att.svg
+    logo: /images/carriers/carriers/0/logo.svg
   - name: Cricket
-    logo: /images/carriers/cricket.svg
+    logo: /images/carriers/carriers/1/logo.svg
   - name: Boost Mobile
-    logo: /images/carriers/boost-mobile.svg
+    logo: /images/carriers/carriers/2/logo.svg
   - name: Consumer Cellular
-    logo: /images/carriers/consumer-cellular.svg
+    logo: /images/carriers/carriers/3/logo.svg
   - name: T-Mobile
-    logo: /images/carriers/tmobile.svg
+    logo: /images/carriers/carriers/4/logo.svg
   - name: Metro PCS
-    logo: /images/carriers/metro-pcs.svg
+    logo: /images/carriers/carriers/5/logo.svg
   - name: Mint Mobile
-    logo: /images/carriers/mint-mobile.svg
+    logo: /images/carriers/carriers/6/logo.svg
   - name: Verizon
-    logo: /images/carriers/verizon.svg
+    logo: /images/carriers/carriers/7/logo.svg
   - name: Tracfone
-    logo: /images/carriers/tracfone.svg
+    logo: /images/carriers/carriers/8/logo.svg
   - name: Spectrum Mobile
-    logo: /images/carriers/spectrum.svg
+    logo: /images/carriers/carriers/9/logo.svg
   - name: Xfinity Mobile
-    logo: /images/carriers/xfinity-mobile.svg
+    logo: /images/carriers/carriers/10/logo.svg
   - name: Visible
-    logo: /images/carriers/visible.svg
+    logo: /images/carriers/carriers/11/logo.svg
 testimonials:
   - name: Brandon Altos
     role: Litigation Partner

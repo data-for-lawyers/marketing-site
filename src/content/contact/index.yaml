@@ -1,13 +1,15 @@
 title: Contact Us
 eyebrow: Contact
 description: >-
-  Tell us about your records workflow and we will help you take the next step.
-sectionEyebrow: Get in touch
-formTitle: Tell us about your records workflow
+  Whether you’re interested in scheduling a demo, have questions about Data For
+  Lawyers, or want to learn how we can help streamline your records requests,
+  we’re here to help.
+sectionEyebrow: Contact Us
+formTitle: How we can help?
 formPanelEyebrow: Message
-formPanelTitle: Send us a note
+formPanelTitle: Send Us a Message
 formSubmitLabel: Submit
 namePlaceholder: Name
 phonePlaceholder: Phone
 emailPlaceholder: Email Address
-messagePlaceholder: How can we help with your records requests?
+messagePlaceholder: Tell us how we can help.

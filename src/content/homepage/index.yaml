@@ -1,4 +1,4 @@
-heroTitle: Chase is here
+heroTitle: Obtain Mobile Carrier & Third-Party Records Faster
 heroSubtitle: >-
   Automate records requests, track every request, and receive authenticated
   carrier and third-party records through one secure, organized platform.
@@ -8,8 +8,9 @@ heroSecondaryCta: See the platform
 servicesEyebrow: Capabilities
 servicesTitle: A Better Way to Retrieve Records
 servicesDescription: >-
-  Scroll through the capabilities that help legal teams move from request to
-  authenticated delivery — without the usual chaos.
+  Data For Lawyers brings every stage of the records request process into one
+  secure platform from submission and tracking to authenticated delivery and
+  ongoing support.
 servicesHint: Drag or scroll to explore
 servicesCtaLabel: Explore all services
 comparisonEyebrow: Why Us
@@ -52,39 +53,41 @@ ctaDescription: >-
   carrier and third-party records retrieval.
 services:
   - title: Efficient Request Management
-    description: Submit requests in minutes through a secure online platform.
+    description: >-
+      Create, organize, and manage record requests through a centralized
+      platform designed for legal professionals.
     bullets:
-      - Centralized request management
-      - Real-time status updates
-      - Unlimited request history
-      - Secure document storage
-    image: /images/homepage/services/services/0/image.jpg
+      - 'Centralized Request Management '
+      - Real-Time Status Tracking
+      - Complete Request History
+    image: /images/homepage/services/services/0/image.png
   - title: Authenticated Document Delivery
-    description: Receive organized, authenticated records ready for legal review.
+    description: >-
+      Receive authenticated records packages organized for efficient review and
+      litigation support.
     bullets:
-      - Carrier-specific requests
-      - Authenticated PDF production
-      - Complete metadata
-      - Chain-of-custody documentation
-      - Organized delivery
-    image: /images/homepage/services/services/1/image.jpg
+      - Carrier-Specific Processing
+      - Metadata Preservation
+      - Legal Service​​​
+    image: /images/homepage/services/services/1/image.png
   - title: Intelligent Automation
-    description: Technology handles repetitive tasks so your team can focus on your case.
+    description: >-
+      Automate repetitive administrative tasks while maintaining visibility into
+      every records request.
     bullets:
-      - Automated workflows
-      - Request tracking
-      - Quality verification
-      - Faster turnaround
-    image: /images/homepage/services/services/2/image.jpg
+      - Automated Workflows
+      - Status Tracking
+      - Quality Assurance
+    image: /images/homepage/services/services/2/image.png
   - title: Expert Support
     description: >-
-      When questions arise, our experienced team is available to help with
-      records requests, documentation, and technical questions.
+      Work with experienced professionals who understand records requests,
+      carrier documentation, and legal workflows.
     bullets:
-      - Dedicated case managers for complex requests
-      - Technical support for data interpretation
-      - Expert consultation for special requirements
-    image: /images/homepage/services/services/3/image.jpg
+      - Complex Request Guidance
+      - Expert Consultation for Special Requirements
+      - Technical Support for Data Interpretation
+    image: /images/homepage/services/services/3/image.png
   - title: Results You Can Trust
     description: Consistent outcomes backed by authenticated delivery and expert support.
     bullets:
@@ -93,7 +96,7 @@ services:
       - Improve organization
       - Maintain documentation integrity
       - Deliver consistent results
-    image: /images/homepage/services/services/4/image.jpg
+    image: /images/homepage/services/services/4/image.png
 carriers:
   - name: AT&T
     logo: /images/carriers/carriers/0/logo.svg

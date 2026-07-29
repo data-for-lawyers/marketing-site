@@ -4,9 +4,7 @@ import { withBase } from '../lib/paths';
 
 interface Props {
   logoUrl: string;
-  phone?: string;
   ctaLabel: string;
-  ctaUrl: string;
   signInUrl: string;
   signInLabel?: string;
   navLinks?: readonly NavLink[];
@@ -15,7 +13,6 @@ interface Props {
 const {
   logoUrl,
   ctaLabel,
-  ctaUrl,
   signInUrl,
   signInLabel = 'Log in',
   navLinks = defaultNavLinks,

@@ -1,7 +1,7 @@
 import { withBase } from './paths';
 
 /**
- * Normalize Keystatic image field values to public URLs.
+ * Normalize local CMS image field values to public URLs.
  * Supports seeded filenames (`hero.jpg`) and full paths (`/images/...`).
  */
 export function resolveCmsImage(
@@ -17,11 +17,4 @@ export function resolveCmsImage(
   }
   const folder = publicPath.endsWith('/') ? publicPath : `${publicPath}/`;
   return withBase(`${folder}${value}`);
-}
-
-export function resolveCmsImages(
-  values: readonly (string | null | undefined)[] | null | undefined,
-  publicPath: string,
-): string[] {
-  return (values ?? []).map((value) => resolveCmsImage(value, publicPath)).filter(Boolean);
 }

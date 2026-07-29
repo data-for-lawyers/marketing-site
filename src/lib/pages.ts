@@ -32,14 +32,14 @@ const PATH_TO_PAGE: Record<string, PageKey> = {
   '/terms-of-service': 'terms',
 };
 
-export function normalizePath(path: string): string {
+function normalizePath(path: string): string {
   if (!path) return '/';
   const bare = path.split('?')[0].split('#')[0];
   if (bare.length > 1 && bare.endsWith('/')) return bare.slice(0, -1);
   return bare;
 }
 
-export function getPageKey(path: string): PageKey | null {
+function getPageKey(path: string): PageKey | null {
   const normalized = normalizePath(path);
   if (PATH_TO_PAGE[normalized]) return PATH_TO_PAGE[normalized];
   if (normalized.startsWith('/blog/')) return 'blog';

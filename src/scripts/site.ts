@@ -8,7 +8,7 @@ export function initAccordions() {
 
       button.addEventListener('click', () => {
         const panel = button.nextElementSibling as HTMLElement | null;
-        const item = button.closest('.faq-item, .accordion-item');
+        const item = button.closest('.faq-item');
         const isOpen = panel?.classList.contains('open');
 
         root.querySelectorAll('.accordion-panel.open').forEach((openPanel) => {
@@ -17,7 +17,7 @@ export function initAccordions() {
         root.querySelectorAll('[data-accordion-button]').forEach((openButton) => {
           openButton.setAttribute('aria-expanded', 'false');
         });
-        root.querySelectorAll('.faq-item.is-open, .accordion-item.is-open').forEach((openItem) => {
+        root.querySelectorAll('.faq-item.is-open').forEach((openItem) => {
           openItem.classList.remove('is-open');
         });
 
@@ -170,58 +170,6 @@ export function initBlogLoadMore() {
   });
 }
 
-export function initPlatformExplorer() {
-  document.querySelectorAll<HTMLElement>('[data-platform-explorer]').forEach((root) => {
-    if (root.dataset.bound === 'true') return;
-    root.dataset.bound = 'true';
-
-    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-platform-tab]')];
-    const panels = [...root.querySelectorAll<HTMLElement>('[data-platform-panel]')];
-    if (!tabs.length || !panels.length) return;
-
-    const activate = (index: number) => {
-      tabs.forEach((tab, i) => {
-        const active = i === index;
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-selected', String(active));
-        tab.tabIndex = active ? 0 : -1;
-      });
-
-      panels.forEach((panel, i) => {
-        const active = i === index;
-        panel.classList.toggle('is-active', active);
-        panel.setAttribute('aria-hidden', String(!active));
-        if (active) panel.removeAttribute('inert');
-        else panel.setAttribute('inert', '');
-      });
-    };
-
-    panels.forEach((panel, i) => {
-      if (i === 0) panel.removeAttribute('inert');
-      else panel.setAttribute('inert', '');
-    });
-
-    tabs.forEach((tab, index) => {
-      tab.tabIndex = index === 0 ? 0 : -1;
-      tab.addEventListener('click', () => activate(index));
-      tab.addEventListener('keydown', (event) => {
-        const nextKeys = ['ArrowDown', 'ArrowRight'];
-        const prevKeys = ['ArrowUp', 'ArrowLeft'];
-        if (![...nextKeys, ...prevKeys, 'Home', 'End'].includes(event.key)) return;
-
-        event.preventDefault();
-        let next = index;
-        if (nextKeys.includes(event.key)) next = (index + 1) % tabs.length;
-        if (prevKeys.includes(event.key)) next = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = tabs.length - 1;
-        activate(next);
-        tabs[next]?.focus();
-      });
-    });
-  });
-}
-
 export function initCapabilityRail() {
   document.querySelectorAll<HTMLElement>('.capability-track').forEach((track) => {
     if (track.dataset.bound === 'true') return;
@@ -304,7 +252,6 @@ export function initSiteScripts() {
   initHeader();
   initMobileMenu();
   initBlogLoadMore();
-  initPlatformExplorer();
   initCapabilityRail();
   initRevealAnimations();
 }
